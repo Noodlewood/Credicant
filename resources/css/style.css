@@ -1,0 +1,103 @@
+body {
+	font-family: 'Oswald', Arial, Verdana, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #000;
+
+}
+
+.credicant {
+    min-width: 100%;
+    position: relative;
+    /*
+    background: transparent url(../gfx/credicant_bg.png) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    */
+}
+
+.logo {
+    background: transparent url(../gfx/logo.png) no-repeat center center;
+    background-size: contain;
+    width: 164px;
+    height: 169px;
+    margin: 5px auto;
+}
+
+.logo-big {
+    background: transparent url(../gfx/logo_big_transparent.png) no-repeat center center;
+    margin: 0 auto;
+    width: 534px;
+    height: 100%;
+}
+
+.beans-shadow {
+    background: transparent url(../gfx/beans_shadow.png) no-repeat center 80px;
+    margin: 0 auto;
+    width: 100%;
+    height: 800px;
+    position: relative;
+}
+
+.textbar {
+    background: #000 none;
+    cursor: default;
+    color: #fff;
+    padding: 8px 15px 8px 15px;
+    font: 'Oswald';
+    position: absolute;
+}
+
+.textbar-left {
+    left: -500px;
+}
+
+.textbar-right {
+    right: -500px;
+}
+
+.header {
+    position: fixed;
+    top: -200px;
+    width: 100%;
+    z-index: 100000;
+}
+
+.header-btn {
+    width: 35px;
+    height: 45px;
+    background: #d50065 none;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.header-btn:hover {
+    cursor: pointer;
+    background: #fff none;
+}
+
+.header-btn-holder {
+    position: absolute;
+    top: 0;
+}
+
+.header-btn-home {
+    background: #567483 none;
+}
+
+.content {
+    margin: 0 100px 150px 100px;
+    background: #fff none;
+}
+
+.circle-white {
+    width: 350px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5) none;
+    margin: -200px auto;
+}
