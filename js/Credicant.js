@@ -33,7 +33,7 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
 		this.addSection(logo, '#000000');
 
 		var text = new CRC.views.content.FadeTextWithImage('beans-shadow', this._sectionHeight);
-		//this.addSection(text, '#ff3500');
+		this.addSection(text, '#ff3500');
 		text.addTextBar("Lorem Ipsum", "right", 50);
 		text.addTextBar("Lorem Ipsum", "left", 150);
 		text.addTextBar("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,", "left", 200);
@@ -44,7 +44,7 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
 
 		var logo4 = $('<div></div>')
 			.addClass('logo-big')
-		this.addSection(logo4, '#7ce700');
+		this.addSection(logo4, '#6ce155');
 
     },
 
