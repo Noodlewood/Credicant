@@ -30,7 +30,7 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
 
 		var logo = $('<div></div>')
 			.addClass('logo-big');
-		this.addSection(logo, '#000000');
+		this.addSection(logo, '#ffffff');
 
 		var text = new CRC.views.content.FadeTextWithImage('beans-shadow', this._sectionHeight);
 		this.addSection(text, '#ff3500');
@@ -45,6 +45,13 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
 		var logo4 = $('<div></div>')
 			.addClass('logo-big')
 		this.addSection(logo4, '#6ce155');
+
+		simpleCart({
+			checkout: { 
+				type: "PayPal" , 
+				email: "you@yours.com" 
+			}
+		});	
 
     },
 

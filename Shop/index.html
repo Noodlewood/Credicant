@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>Credicant</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href="resources/css/foundation.min.css" type="text/css" rel="stylesheet">
+    <link href="resources/css/style.css" type="text/css" rel="stylesheet">    
+</head>
+<body>
+
+ <div class="row centered">
+        <div id="cartModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Warenkorb</h2>
+          <div class="large-12 columns">  
+            <div class="row">
+              <div class="large-6 columns">
+                <form id="order" >
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Vorname
+                        <input type="text" name="forename" required/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Nachname
+                        <input type="text" name="surname" required/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Straße
+                        <input type="text" name="street" required/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Stadt
+                        <input type="text" name="city" required/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>PLZ
+                        <input type="number" name="postal" required/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <label>Mail
+                        <input type="email" name="mail" required/>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                        <div class="large-6 columns">
+                          <input type="submit" class="button medium primary radius" value="Bestellen" />
+                        </div>
+                        <div class="large-6 columns">
+                          <div data-alert class="alert-box success radius">
+                            Bestellbestätigung wurde per Email versandt.
+                            <a href="#" class="close">&times;</a>
+                          </div>
+                          <div data-alert class="alert-box alert radius">
+                            Bei der Bestellung ist wohl etwas schief gegangen.
+                            <a href="#" class="close">&times;</a>
+                          </div>
+                        </div>
+                        
+                    </div>
+                  </div>                
+                </form>
+            </div>
+              <div id="cartItems" class="large-6 columns"></div>
+              </div>
+          </div>
+          
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <div id="impressumModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Impressum</h2>
+          <p>Anne Herrmann<br /> KaffeeKanne | Café, Catering und Schulung<br /> Triesdorfer Straße 31a<br /> 91746 Weidenbach</p>
+          <p>Telefon: 0176-63832413</p>
+          <p>E-Mail: information@anne-kaffeekanne.de</p>
+          <p>Umsatzsteuer-ID: 203/228/11293</p>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <div id="detailModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="detailTitle"></h2>
+          <img id="detailPicture" class="large-2 small-6 columns" src="">
+          <div class="large-10 small-6 columns ">          
+          <div id="detailDesc"></div>     
+          </div>                   
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+
+        <div class="large-12 columns">  
+          <div class="row">    
+            <div class="large-4 small-12 columns ">     
+              <img src="resources/gfx/logo-schwarz.jpg">
+     
+              <div class="hide-for-small panel shadow opac">
+                <h3>Header</h3>
+                <h5 class="subheader">Hier kann Text rein!
+                </h5>
+              </div>
+     
+              <a href="#" data-reveal-id="cartModal">
+                <div class="panel callout radius go-to-cart shadow opac">
+                  <h5 class="shopping-cart-icon">keine Waren im Korb</h5>
+                </div>
+              </a>
+     
+            </div>
+     
+            <div class="large-8 columns">
+              <div class="row">
+    
+                <a class="large-4 small-6 columns" href="#" data-reveal-id="detailModal">
+                  <div class="shadow shopping-item opac">
+                    <img class="item-pic opac" src="resources/gfx/yogo.jpg">
+                    <div class="item-desc">
+                    Dieser wunderbar milde Kaffee mit Kakao- und Nussaromen kommt von einer der hï¿½chstgelegenen Farmen Brasiliens, der Fanzenda Ambiental Fortaleza (FAF) in der Region Mococa. Die Mitgliedsfamilien der Kooperative FAF (Umweltfestung) produzieren ausschlieï¿½lich naturfreundlich, also nachhaltig und im Einklang mit der Natur. Der Kaffee wird von Hand gepflï¿½ckt und sonnengetrocknet. Der "bob-o-link" wird von uns gemeinsam mit befreundeten Kollegen direkt von dort importiert und wir sind sehr froh und stolz, diesen Kaffee anbieten zu dürfen.</div>
+                    <div class="panel">           
+                      <h5 class="item-title">Yogo</h5>
+                      &nbsp;€<h6 class="subheader item-value">10.00</h6>
+                      </div>          
+                  </div> 
+                    <div class="add-to-cart shadow-small"></div>         
+                </a>
+     
+                <a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal">
+                  <div class="shadow shopping-item opac">
+                    <img class="item-pic" src="resources/gfx/espresso-blended.png">
+                    <div class="item-desc">
+                    Dieser wunderbar milde Kaffee mit Kakao- und Nussaromen kommt von einer der hï¿½chstgelegenen Farmen Brasiliens, der Fanzenda Ambiental Fortaleza (FAF) in der Region Mococa. Die Mitgliedsfamilien der Kooperative FAF (Umweltfestung) produzieren ausschlieï¿½lich naturfreundlich, also nachhaltig und im Einklang mit der Natur. Der Kaffee wird von Hand gepflï¿½ckt und sonnengetrocknet. Der "bob-o-link" wird von uns gemeinsam mit befreundeten Kollegen direkt von dort importiert und wir sind sehr froh und stolz, diesen Kaffee anbieten zu dürfen.</div>
+                    <div class="panel">                    
+                      <h5 class="item-title">Espresso Blended</h5>
+                      &nbsp;€<h6 class="subheader item-value">5.00</h6>
+                      
+                    </div>
+                  </div>  
+                  <div class="add-to-cart shadow-small"></div>
+                </a>
+     
+                <a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal">
+                  <div class="shadow shopping-item opac">
+                    <img class="item-pic" src="resources/gfx/coffee-straight.png">
+                    <div class="item-desc">
+                     Ein Regenwald- Robusta aus dem District Balue der Region Dikome im Sï¿½dwesten Kameruns. Angebaut wird er ohne Chemikalien von den Kleinbauern der Rumpi-Area-Farmers- Cooperative Ltd. und der Konafcoop Ltd. in den Rumpi Bergen. Der Kaffee wï¿½chst nahezu naturbelassen, wird von Hand geerntet, mehrfach verlesen und ist fair gehandelt. Ein typisch krï¿½ftiger Robusta- Kaffee, mit viel Koffein und herben Aroma. Eine Empfehlung fï¿½r den anspruchsvollen Espressotrinker.</div>
+                    <div class="panel">                    
+                      <h5 class="item-title">Coffee Straight</h5>
+                      &nbsp;€<h6 class="subheader item-value">46.00</h6>
+                      
+                    </div>
+                  </div>  
+                  <div class="add-to-cart shadow-small"></div>
+                </a>    
+
+                <a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal">
+                  <div class="shadow shopping-item opac">
+                    <img class="item-pic" src="resources/gfx/coffee-straight.png">
+                    <div class="item-desc">
+                     Ein Regenwald- Robusta aus dem District Balue der Region Dikome im Sï¿½dwesten Kameruns. Angebaut wird er ohne Chemikalien von den Kleinbauern der Rumpi-Area-Farmers- Cooperative Ltd. und der Konafcoop Ltd. in den Rumpi Bergen. Der Kaffee wï¿½chst nahezu naturbelassen, wird von Hand geerntet, mehrfach verlesen und ist fair gehandelt. Ein typisch krï¿½ftiger Robusta- Kaffee, mit viel Koffein und herben Aroma. Eine Empfehlung fï¿½r den anspruchsvollen Espressotrinker.</div>
+                    <div class="panel">                    
+                      <h5 class="item-title">Coffee Straight</h5>
+                      &nbsp;€<h6 class="subheader item-value">46.00</h6>
+                      
+                    </div>
+                  </div>  
+                  <div class="add-to-cart shadow-small"></div>
+                </a>
+            
+              <div class="row">
+                <div class="large-12 columns opac">
+                <div class="shadow">
+                  <div class="panel">
+                    
+                    <div class="row">
+     
+                      <img  class="large-2 small-6 columns" src="">
+                      <div class="large-10 small-6 columns ">
+                        <strong><div>This Site Is Managed By</div><hr/></strong>
+                        <div>Hier kann Text rein1</div>                        
+                      </div>
+     
+                    </div>
+                  </div>
+                  </div>
+                </div>
+     
+              </div>
+            </div>
+          </div>
+
+          <footer class="row">
+            <div class="large-12 columns">
+              <div class="row">
+     
+                <div class="large-6 columns">
+                  <p>© hier ein copyright</p>
+                </div>
+     
+                <div class="large-6 columns">
+                  <ul class="inline-list right">                  
+                    <li><a href="#" data-reveal-id="impressumModal">Impressum</a></li>
+                  </ul>
+                </div>
+     
+              </div>
+            </div>
+          </footer>            
+        </div>
+      </div>
+    <script src="libs/vendor/jquery.js"></script>
+    <script src="libs/vendor/modernizr.js"></script>
+    <script src="libs/foundation.min.js"></script>
+    <script src="libs/simpleCart.min.js"></script>
+    <script>
+        $(document).foundation();
+        $(document).ready(function() {
+            var cartDiv = $('.shopping-cart-icon');
+            var cartModalItems = $('#cartItems');
+            var shoppingItems = [];
+
+            $('.add-to-cart').click(function(e) {
+                var itemValueField = $(this).prev('.item-value')[0];
+                var itemValue = $(itemValueField).text();
+                
+                var itemTitleField = $(this).siblings('.item-title');
+                var itemTitle = $(itemTitleField).text();
+
+                shoppingItems.push({
+                    title: itemTitle,
+                    value: parseFloat(itemValue)
+                })
+
+                cartDiv.text(shoppingItems.length + " Waren im Korb");          
+
+                return false;
+            })
+
+            $('.go-to-cart').click(function() {
+                cartModalItems.empty();
+                var sum = 0;
+                $.each(shoppingItems, function(index, obj) {
+
+                    var row = $('<div></div>').addClass("row");
+                    var outer = $('<div></div>').addClass("large-12 columns item-margin");
+                    var title = $('<div></div>').addClass("large-6 columns").text(obj.title);
+                    var value = $('<div></div>').addClass("large-6 columns align-right").text(obj.value + " €");
+                    
+                    outer.append(title);
+                    outer.append(value);
+                    row.append(outer);
+                    cartModalItems.append(row);
+
+                    sum += obj.value;
+                })
+                cartModalItems.append($('<hr />'));
+                var row = $('<div></div>').addClass("row");
+                var outer = $('<div></div>').addClass("large-12 columns");
+                var title = $('<div></div>').addClass("large-6 columns").text("Summe:");
+                var value = $('<div></div>').addClass("large-6 columns align-right").text(sum + " €");
+                                           
+                outer.append(title);
+                outer.append(value);
+                row.append(outer);
+                cartModalItems.append(row);
+            });
+          
+          $('.alert-box').hide();
+          $("#order").submit(function(event) {              
+
+              var forenameField = $("input[name='forename']");
+              var surnameField = $("input[name='surname']");
+              var streetField = $("input[name='street']");
+              var cityField = $("input[name='city']");
+              var postalField = $("input[name='postal']");
+              var mailField = $("input[name='mail']");
+
+              var forename = forenameField.val();
+              var surname = surnameField.val();
+              var street = streetField.val();
+              var city = cityField.val();
+              var postal = postalField.val();
+              var mail = mailField.val();             
+
+              $.post('order.php',  {
+                order: shoppingItems,
+                forename: forename,
+                surname: surname,
+                street: street,
+                city: city,
+                postal: postal,
+                mail: mail
+              }
+              , function(response) {    
+                  
+                  $('.alert-box.success').show();     
+                  console.log("Response: "+response);
+              });
+              event.preventDefault();
+          });
+
+          $('.shopping-item').click(function() {
+            
+            var title = $(this).find('.item-title').text();            
+            var pic = $(this).find('.item-pic').prop('src');
+            var desc = $(this).find('.item-desc').text();
+            
+            $('#detailPicture').prop('src', pic);
+            $('#detailTitle').text(title);
+            $('#detailDesc').text(desc);
+          })
+
+          $('.opac').hover(function() {
+            $(this).css('opacity', 1);
+          }, function() {
+            $(this).css('opacity', 0.7);
+          })
+        });
+    </script>
+</body>
+</html>
