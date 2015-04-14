@@ -110,8 +110,8 @@
               <img src="resources/gfx/logo-schwarz.jpg">
      
               <div class="hide-for-small panel shadow opac">
-                <h3>Header</h3>
-                <h5 class="subheader">Hier kann Text rein!
+                <h3>Credicant</h3>
+                <h5 class="subheader">Lass das Leben für dich arbeiten!
                 </h5>
               </div>
      
@@ -125,62 +125,7 @@
      
             <div class="large-8 columns">
               <div class="row">
-    
-                <a class="large-4 small-6 columns" href="#" data-reveal-id="detailModal">
-                  <div class="shadow shopping-item opac">
-                    <img class="item-pic opac" src="resources/gfx/yogo.jpg">
-                    <div class="item-desc">
-                    Dieser wunderbar milde Kaffee mit Kakao- und Nussaromen kommt von einer der hï¿½chstgelegenen Farmen Brasiliens, der Fanzenda Ambiental Fortaleza (FAF) in der Region Mococa. Die Mitgliedsfamilien der Kooperative FAF (Umweltfestung) produzieren ausschlieï¿½lich naturfreundlich, also nachhaltig und im Einklang mit der Natur. Der Kaffee wird von Hand gepflï¿½ckt und sonnengetrocknet. Der "bob-o-link" wird von uns gemeinsam mit befreundeten Kollegen direkt von dort importiert und wir sind sehr froh und stolz, diesen Kaffee anbieten zu dürfen.</div>
-                    <div class="panel">           
-                      <h5 class="item-title">Yogo</h5>
-                      &nbsp;€<h6 class="subheader item-value">10.00</h6>
-                      </div>          
-                  </div> 
-                    <div class="add-to-cart shadow-small"></div>         
-                </a>
-     
-                <a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal">
-                  <div class="shadow shopping-item opac">
-                    <img class="item-pic" src="resources/gfx/espresso-blended.png">
-                    <div class="item-desc">
-                    Dieser wunderbar milde Kaffee mit Kakao- und Nussaromen kommt von einer der hï¿½chstgelegenen Farmen Brasiliens, der Fanzenda Ambiental Fortaleza (FAF) in der Region Mococa. Die Mitgliedsfamilien der Kooperative FAF (Umweltfestung) produzieren ausschlieï¿½lich naturfreundlich, also nachhaltig und im Einklang mit der Natur. Der Kaffee wird von Hand gepflï¿½ckt und sonnengetrocknet. Der "bob-o-link" wird von uns gemeinsam mit befreundeten Kollegen direkt von dort importiert und wir sind sehr froh und stolz, diesen Kaffee anbieten zu dürfen.</div>
-                    <div class="panel">                    
-                      <h5 class="item-title">Espresso Blended</h5>
-                      &nbsp;€<h6 class="subheader item-value">5.00</h6>
-                      
-                    </div>
-                  </div>  
-                  <div class="add-to-cart shadow-small"></div>
-                </a>
-     
-                <a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal">
-                  <div class="shadow shopping-item opac">
-                    <img class="item-pic" src="resources/gfx/coffee-straight.png">
-                    <div class="item-desc">
-                     Ein Regenwald- Robusta aus dem District Balue der Region Dikome im Sï¿½dwesten Kameruns. Angebaut wird er ohne Chemikalien von den Kleinbauern der Rumpi-Area-Farmers- Cooperative Ltd. und der Konafcoop Ltd. in den Rumpi Bergen. Der Kaffee wï¿½chst nahezu naturbelassen, wird von Hand geerntet, mehrfach verlesen und ist fair gehandelt. Ein typisch krï¿½ftiger Robusta- Kaffee, mit viel Koffein und herben Aroma. Eine Empfehlung fï¿½r den anspruchsvollen Espressotrinker.</div>
-                    <div class="panel">                    
-                      <h5 class="item-title">Coffee Straight</h5>
-                      &nbsp;€<h6 class="subheader item-value">46.00</h6>
-                      
-                    </div>
-                  </div>  
-                  <div class="add-to-cart shadow-small"></div>
-                </a>    
-
-                <a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal">
-                  <div class="shadow shopping-item opac">
-                    <img class="item-pic" src="resources/gfx/coffee-straight.png">
-                    <div class="item-desc">
-                     Ein Regenwald- Robusta aus dem District Balue der Region Dikome im Sï¿½dwesten Kameruns. Angebaut wird er ohne Chemikalien von den Kleinbauern der Rumpi-Area-Farmers- Cooperative Ltd. und der Konafcoop Ltd. in den Rumpi Bergen. Der Kaffee wï¿½chst nahezu naturbelassen, wird von Hand geerntet, mehrfach verlesen und ist fair gehandelt. Ein typisch krï¿½ftiger Robusta- Kaffee, mit viel Koffein und herben Aroma. Eine Empfehlung fï¿½r den anspruchsvollen Espressotrinker.</div>
-                    <div class="panel">                    
-                      <h5 class="item-title">Coffee Straight</h5>
-                      &nbsp;€<h6 class="subheader item-value">46.00</h6>
-                      
-                    </div>
-                  </div>  
-                  <div class="add-to-cart shadow-small"></div>
-                </a>
-            
+                <div class="item-list"></div>                
               <div class="row">
                 <div class="large-12 columns opac">
                 <div class="shadow">
@@ -224,111 +169,145 @@
       </div>
     <script src="libs/vendor/jquery.js"></script>
     <script src="libs/vendor/modernizr.js"></script>
-    <script src="libs/foundation.min.js"></script>
-    <script src="libs/simpleCart.min.js"></script>
+    <script src="libs/foundation.min.js"></script>    
     <script>
         $(document).foundation();
         $(document).ready(function() {
-            var cartDiv = $('.shopping-cart-icon');
-            var cartModalItems = $('#cartItems');
-            var shoppingItems = [];
 
-            $('.add-to-cart').click(function(e) {
-                var itemValueField = $(this).prev('.item-value')[0];
-                var itemValue = $(itemValueField).text();
-                
-                var itemTitleField = $(this).siblings('.item-title');
-                var itemTitle = $(itemTitleField).text();
+            var shopItemOuter = $('<a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal"></a>');
+            var shopItemInner = $('<div class="shadow shopping-item opac"></div>');
+            var shopItemPicture = $('<img class="item-pic" src="">');
+            var shopItemDescription = $('<div class="item-desc"></div>');
+            var shopItemTitle = $('<h5 class="item-title"></h5>');
+            var shopItemValue = $('<h6 class="subheader item-value"></h6>');
+            var shopItemPanel = $('<div class="panel"></div>');
+            var shopItemAdd = $('<div class="add-to-cart shadow-small"></div>');
 
-                shoppingItems.push({
-                    title: itemTitle,
-                    value: parseFloat(itemValue)
-                })
+            shopItemOuter.append(shopItemInner)
+                         .append(shopItemAdd);
+            shopItemInner.append(shopItemPicture)
+                         .append(shopItemDescription)
+                         .append(shopItemPanel);
+            shopItemPanel.append(shopItemTitle)
+                         .append('&nbsp;€')
+                         .append(shopItemValue);
+            
+            $.getJSON( "products.json", function( data ) {
+                $.each( data.products, function( index, product ) {                  
+                  shopItemTitle.text(product.title);
+                  shopItemValue.text(product.price);
+                  shopItemPicture.attr('src', product.picture);
+                  shopItemDescription.text(product.desc);
 
-                cartDiv.text(shoppingItems.length + " Waren im Korb");          
+                  shopItemOuter.clone().appendTo($('.item-list'));
+                });
 
-                return false;
+                buildSite();
+            });
+
+            var buildSite = function() {
+
+              var cartDiv = $('.shopping-cart-icon');
+              var cartModalItems = $('#cartItems');
+              var shoppingItems = [];
+
+              $('.add-to-cart').click(function(e) {
+                  var itemValueField = $(this).prev('.item-value')[0];
+                  var itemValue = $(itemValueField).text();
+                  
+                  var itemTitleField = $(this).siblings('.item-title');
+                  var itemTitle = $(itemTitleField).text();
+
+                  shoppingItems.push({
+                      title: itemTitle,
+                      value: parseFloat(itemValue)
+                  })
+
+                  cartDiv.text(shoppingItems.length + " Waren im Korb");          
+
+                  return false;
+              })
+
+              $('.go-to-cart').click(function() {
+                  cartModalItems.empty();
+                  var sum = 0;
+                  $.each(shoppingItems, function(index, obj) {
+
+                      var row = $('<div></div>').addClass("row");
+                      var outer = $('<div></div>').addClass("large-12 columns item-margin");
+                      var title = $('<div></div>').addClass("large-6 columns").text(obj.title);
+                      var value = $('<div></div>').addClass("large-6 columns align-right").text(obj.value + " €");
+                      
+                      outer.append(title);
+                      outer.append(value);
+                      row.append(outer);
+                      cartModalItems.append(row);
+
+                      sum += obj.value;
+                  })
+                  cartModalItems.append($('<hr />'));
+                  var row = $('<div></div>').addClass("row");
+                  var outer = $('<div></div>').addClass("large-12 columns");
+                  var title = $('<div></div>').addClass("large-6 columns").text("Summe:");
+                  var value = $('<div></div>').addClass("large-6 columns align-right").text(sum + " €");
+                                             
+                  outer.append(title);
+                  outer.append(value);
+                  row.append(outer);
+                  cartModalItems.append(row);
+              });
+            
+            $('.alert-box').hide();
+            $("#order").submit(function(event) {              
+
+                var forenameField = $("input[name='forename']");
+                var surnameField = $("input[name='surname']");
+                var streetField = $("input[name='street']");
+                var cityField = $("input[name='city']");
+                var postalField = $("input[name='postal']");
+                var mailField = $("input[name='mail']");
+
+                var forename = forenameField.val();
+                var surname = surnameField.val();
+                var street = streetField.val();
+                var city = cityField.val();
+                var postal = postalField.val();
+                var mail = mailField.val();             
+
+                $.post('order.php',  {
+                  order: shoppingItems,
+                  forename: forename,
+                  surname: surname,
+                  street: street,
+                  city: city,
+                  postal: postal,
+                  mail: mail
+                }
+                , function(response) {    
+                    
+                    $('.alert-box.success').show();     
+                    console.log("Response: "+response);
+                });
+                event.preventDefault();
+            });
+
+            $('.shopping-item').click(function() {
+              
+              var title = $(this).find('.item-title').text();            
+              var pic = $(this).find('.item-pic').prop('src');
+              var desc = $(this).find('.item-desc').text();
+              
+              $('#detailPicture').prop('src', pic);
+              $('#detailTitle').text(title);
+              $('#detailDesc').text(desc);
             })
 
-            $('.go-to-cart').click(function() {
-                cartModalItems.empty();
-                var sum = 0;
-                $.each(shoppingItems, function(index, obj) {
-
-                    var row = $('<div></div>').addClass("row");
-                    var outer = $('<div></div>').addClass("large-12 columns item-margin");
-                    var title = $('<div></div>').addClass("large-6 columns").text(obj.title);
-                    var value = $('<div></div>').addClass("large-6 columns align-right").text(obj.value + " €");
-                    
-                    outer.append(title);
-                    outer.append(value);
-                    row.append(outer);
-                    cartModalItems.append(row);
-
-                    sum += obj.value;
-                })
-                cartModalItems.append($('<hr />'));
-                var row = $('<div></div>').addClass("row");
-                var outer = $('<div></div>').addClass("large-12 columns");
-                var title = $('<div></div>').addClass("large-6 columns").text("Summe:");
-                var value = $('<div></div>').addClass("large-6 columns align-right").text(sum + " €");
-                                           
-                outer.append(title);
-                outer.append(value);
-                row.append(outer);
-                cartModalItems.append(row);
-            });
-          
-          $('.alert-box').hide();
-          $("#order").submit(function(event) {              
-
-              var forenameField = $("input[name='forename']");
-              var surnameField = $("input[name='surname']");
-              var streetField = $("input[name='street']");
-              var cityField = $("input[name='city']");
-              var postalField = $("input[name='postal']");
-              var mailField = $("input[name='mail']");
-
-              var forename = forenameField.val();
-              var surname = surnameField.val();
-              var street = streetField.val();
-              var city = cityField.val();
-              var postal = postalField.val();
-              var mail = mailField.val();             
-
-              $.post('order.php',  {
-                order: shoppingItems,
-                forename: forename,
-                surname: surname,
-                street: street,
-                city: city,
-                postal: postal,
-                mail: mail
-              }
-              , function(response) {    
-                  
-                  $('.alert-box.success').show();     
-                  console.log("Response: "+response);
-              });
-              event.preventDefault();
-          });
-
-          $('.shopping-item').click(function() {
-            
-            var title = $(this).find('.item-title').text();            
-            var pic = $(this).find('.item-pic').prop('src');
-            var desc = $(this).find('.item-desc').text();
-            
-            $('#detailPicture').prop('src', pic);
-            $('#detailTitle').text(title);
-            $('#detailDesc').text(desc);
-          })
-
-          $('.opac').hover(function() {
-            $(this).css('opacity', 1);
-          }, function() {
-            $(this).css('opacity', 0.7);
-          })
+            $('.opac').hover(function() {
+              $(this).css('opacity', 1);
+            }, function() {
+              $(this).css('opacity', 0.7);
+            })
+          };
         });
     </script>
 </body>
