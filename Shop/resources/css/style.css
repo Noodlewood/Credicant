@@ -23,9 +23,13 @@ html, body {
 
 .bg-image {
 	background: transparent url("../gfx/logo.png") no-repeat center center;	
-	width: 1000px;
-	height: 100%;
+	width: 743px;
+	height: 555px;
 	position: absolute;		
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
 	-webkit-animation: spin 40s linear infinite;
 }
 
@@ -59,7 +63,7 @@ html, body {
 	background: transparent url('../gfx/plus-box-hover.png') no-repeat center center;	
 }
 
-.item-value {
+.item-price {
 	float: left;
 }
 

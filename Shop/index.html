@@ -100,7 +100,8 @@
           <h2 id="detailTitle"></h2>
           <img id="detailPicture" class="large-2 small-6 columns" src="">
           <div class="large-10 small-6 columns ">          
-          <div id="detailDesc"></div>     
+          <div id="detailDesc"></div> 
+          <div class="add-to-cart shadow-small"></div>    
           </div>                   
           <a class="close-reveal-modal" aria-label="Close">&#215;</a>
         </div>
@@ -180,7 +181,7 @@
             var shopItemPicture = $('<img class="item-pic" src="">');
             var shopItemDescription = $('<div class="item-desc"></div>');
             var shopItemTitle = $('<h5 class="item-title"></h5>');
-            var shopItemValue = $('<h6 class="subheader item-value"></h6>');
+            var shopItemValue = $('<h6 class="subheader item-price"></h6>');
             var shopItemPanel = $('<div class="panel"></div>');
             var shopItemAdd = $('<div class="add-to-cart shadow-small"></div>');
 
@@ -193,14 +194,18 @@
                          .append('&nbsp;€')
                          .append(shopItemValue);
             
+            var products = [];
             $.getJSON( "products.json", function( data ) {
                 $.each( data.products, function( index, product ) {                  
                   shopItemTitle.text(product.title);
                   shopItemValue.text(product.price);
                   shopItemPicture.attr('src', product.picture);
                   shopItemDescription.text(product.desc);
+                  shopItemAdd.attr('id', product.id);
 
                   shopItemOuter.clone().appendTo($('.item-list'));
+
+                  products[product.id] = product;
                 });
 
                 buildSite();
@@ -212,39 +217,28 @@
               var cartModalItems = $('#cartItems');
               var shoppingItems = [];
 
-              $('.add-to-cart').click(function(e) {
-                  var itemValueField = $(this).prev('.item-value')[0];
-                  var itemValue = $(itemValueField).text();
-                  
-                  var itemTitleField = $(this).siblings('.item-title');
-                  var itemTitle = $(itemTitleField).text();
-
-                  shoppingItems.push({
-                      title: itemTitle,
-                      value: parseFloat(itemValue)
-                  })
-
-                  cartDiv.text(shoppingItems.length + " Waren im Korb");          
-
+              $('.add-to-cart').click(function(e) {                  
+                  shoppingItems.push($(this).attr('id'));
+                  cartDiv.text(shoppingItems.length + " Waren im Korb");
                   return false;
               })
 
               $('.go-to-cart').click(function() {
                   cartModalItems.empty();
                   var sum = 0;
-                  $.each(shoppingItems, function(index, obj) {
+                  $.each(shoppingItems, function(index, id) {
 
                       var row = $('<div></div>').addClass("row");
                       var outer = $('<div></div>').addClass("large-12 columns item-margin");
-                      var title = $('<div></div>').addClass("large-6 columns").text(obj.title);
-                      var value = $('<div></div>').addClass("large-6 columns align-right").text(obj.value + " €");
+                      var title = $('<div></div>').addClass("large-6 columns").text(products[id].title);
+                      var value = $('<div></div>').addClass("large-6 columns align-right").text(products[id].price + " €");
                       
                       outer.append(title);
                       outer.append(value);
                       row.append(outer);
                       cartModalItems.append(row);
 
-                      sum += obj.value;
+                      sum += products[id].price;
                   })
                   cartModalItems.append($('<hr />'));
                   var row = $('<div></div>').addClass("row");
@@ -297,10 +291,12 @@
               var title = $(this).find('.item-title').text();            
               var pic = $(this).find('.item-pic').prop('src');
               var desc = $(this).find('.item-desc').text();
+              var price = $(this).find('.item-price').text();
               
               $('#detailPicture').prop('src', pic);
               $('#detailTitle').text(title);
               $('#detailDesc').text(desc);
+              $('#detailPrice').text(desc);
             })
 
             $('.opac').hover(function() {
