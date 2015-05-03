@@ -8,6 +8,18 @@ html, body {
     height: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', Arial, Verdana, sans-serif;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+.margin-top {
+    margin-top: 25px;
+}
+
 @-moz-keyframes spin {
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }
@@ -22,14 +34,14 @@ html, body {
 }
 
 .bg-image {
-	background: transparent url("../gfx/logo.png") no-repeat center center;	
-	width: 743px;
-	height: 555px;
-	position: absolute;		
-	margin-left: auto;
-	margin-right: auto;
+    background: transparent url("../gfx/logo.png") no-repeat center center;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    position: fixed;
 	left: 0;
 	right: 0;
+    top: 0;
 	-webkit-animation: spin 40s linear infinite;
 }
 
@@ -49,7 +61,7 @@ html, body {
 	margin-bottom: 26px;
 }
 
-.add-to-cart {
+.plus-button {
 	background: transparent url('../gfx/plus-box.png') no-repeat center center;	
 	height: 24px;
 	width: 24px;
@@ -59,7 +71,7 @@ html, body {
 	cursor: pointer;
 }
 
-.add-to-cart:hover {
+.plus-button:hover {
 	background: transparent url('../gfx/plus-box-hover.png') no-repeat center center;	
 }
 
@@ -92,5 +104,25 @@ html, body {
 }
 
 .opac {
-	opacity: 0.7;
+	opacity: 0.9;
+}
+
+.detail-thumb {
+    width: 100px;
+    height: 100px;
+    background: transparent none no-repeat center center;
+    background-size: contain;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.detail-thumb:hover {
+    opacity: 0.6;
+}
+
+#detailDesc {
+    overflow-wrap: break-word;
+    padding: 10px;
 }

@@ -3,31 +3,81 @@
 		"id": 1,
 		"title": "Kafee",
 		"price": 14.00,
-		"picture": "resources/gfx/coffee-straight.png",
+		"pictures":[{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/yogo.jpg"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/yogo.jpg"
+        }],
 		"desc": "sdlkfjskldjfjfsasalökdjfjasfdj"
 	}, {
 		"id": 2,
 		"title": "Yoga",
 		"price": 42.00,
-		"picture": "resources/gfx/yogo.jpg",
+        "pictures":[{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        }],
 		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
 	}, {
 		"id": 3,
 		"title": "Yoga",
 		"price": 42.00,
-		"picture": "resources/gfx/yogo.jpg",
+        "pictures":[{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        }],
 		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
 	}, {
 		"id": 4,
 		"title": "Yoga",
 		"price": 42.00,
-		"picture": "resources/gfx/yogo.jpg",
+        "pictures":[{
+          "src": "resources/gfx/yogo.jpg"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        }],
 		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
 	}, {
 		"id": 5,
 		"title": "Yoga",
 		"price": 42.00,
-		"picture": "resources/gfx/yogo.jpg",
+        "pictures":[{
+          "src": "resources/gfx/yogo.jpg"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        },{
+          "src": "resources/gfx/coffee-straight.png"
+        }],
 		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
 	}]
 }
