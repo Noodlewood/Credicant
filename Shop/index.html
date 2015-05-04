@@ -457,6 +457,7 @@
                 var cartModalItems = $('#cartItems');
                 var shoppingItems = [];
                 var shoppingItemsCount = 0;
+                var sum = 0;
 
                 $('.add-to-cart').click(function (e) {
                     var productId = $(this).attr('id');
@@ -477,32 +478,59 @@
                     }
 
                     shoppingItemsCount++;
+                    sum += products[productId].price;
                     cartDiv.text(shoppingItemsCount + " Waren im Korb");
                     return false;
                 });
 
+                var removeFromCart = function(e) {
+                    var product = e.data[0];
+                    var row = e.data[1];
+                    var title = e.data[2];
+                    var value = e.data[3];
+                    $.each(shoppingItems, function(index, item) {
+                        if (item.id == product.id) {
+                            item.count -= 1;
+                            if (item.count < 1) row.remove();
+                            else {
+                                title.text(item.count + " x " + item.title);
+                                value.text(item.price * item.count + " €");
+                            }
+                            sum -= item.price;
+                            $('.sum').text(sum + " €")
+                        }
+                    });
+
+                    shoppingItemsCount--;
+                    cartDiv.text(shoppingItemsCount + " Waren im Korb");
+                    return false;
+                };
+
                 $('.go-to-cart').click(function () {
                     cartModalItems.empty();
-                    var sum = 0;
+
                     $.each(shoppingItems, function (index, item) {
-                        var row = $('<div></div>').addClass("row");
-                        var outer = $('<div></div>').addClass("large-12 columns item-margin");
-                        var title = $('<div></div>').addClass("large-6 columns").text(item.count + " x " + item.title);
-                        var value = $('<div></div>').addClass("large-6 columns align-right").text(item.price * item.count + " €");
+                        if (item.count > 0) {
+                            var row = $('<div></div>').addClass("row");
+                            var outer = $('<div></div>').addClass("small-12 columns item-margin");
+                            var title = $('<div></div>').addClass("small-4 columns").text(item.count + " x " + item.title);
+                            var value = $('<div></div>').addClass("small-6 columns align-right").text(item.price * item.count + " €");
+                            var deleteBtn = $('<div></div>').addClass("remove-from-cart small-2 minus-button columns shadow-small").click([item, row, title, value], removeFromCart);
 
-                        outer.append(title);
-                        outer.append(value);
-                        row.append(outer);
-                        cartModalItems.append(row);
-
-                        sum += item.price * item.count;
+                            outer.append(deleteBtn);
+                            outer.append(title);
+                            outer.append(value);
+                            row.append(outer);
+                            cartModalItems.append(row);
+                        }
                     });
 
                     cartModalItems.append($('<hr />'));
                     var row = $('<div></div>').addClass("row");
                     var outer = $('<div></div>').addClass("large-12 columns");
                     var title = $('<div></div>').addClass("large-6 columns").text("Summe:");
-                    var value = $('<div></div>').addClass("large-6 columns align-right").text(sum + " €");
+                    var value = $('<div></div>').addClass("sum large-6 columns align-right").text(sum + " €");
+
 
                     outer.append(title);
                     outer.append(value);
@@ -550,7 +578,6 @@
                             }
                             , function (response) {
                                 $('.alert-box.success').show();
-                                console.log("Response: " + response);
                             });
                     event.preventDefault();
                 });

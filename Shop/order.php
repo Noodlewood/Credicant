@@ -1,4 +1,30 @@
 <?php
+    function createOrderMail() {
+        $shoppingItems = $_POST["order"];
+        $surname = $_POST["surname"];
+        $forename = $_POST["forename"];
+        $street = $_POST["street"];
+        $city = $_POST["city"];
+        $postal = $_POST["postal"];
+
+        $mail =
+"Bestellung
+
+";
+        $sum = 0;
+        foreach($shoppingItems as $item) {
+            if ($item["count"] > 0) {
+                $mail .= $item["count"] . " x " . $item["title"] . ": EUR " . $item["price"]*$item["count"] . PHP_EOL;
+                $sum += $item["price"]*$item["count"];
+            }
+        }
+
+        $mail .= "Gesamtpreis: EUR " . $sum . PHP_EOL;;
+        $mail .= "Rechnungsanschrift: " . $forename . " " . $surname . ", " . $street . ", " . $postal . " " . $city . PHP_EOL;;
+
+        return $mail;
+    }
+
     function createConfirmationMail() {
 
         $shoppingItems = $_POST["order"];
@@ -19,8 +45,10 @@ Auftragsbestätigung
 
         $sum = 0;
         foreach($shoppingItems as $item) {
-            $mail .= $item["count"] . " x " . $item["title"] . ": EUR " . $item["price"]*$item["count"] . PHP_EOL;
-            $sum += $item["price"]*$item["count"];
+            if ($item["count"] > 0) {
+                $mail .= $item["count"] . " x " . $item["title"] . ": EUR " . $item["price"] * $item["count"] . PHP_EOL;
+                $sum += $item["price"] * $item["count"];
+            }
         }
 
         $mail .= "Versandkosten: EUR 6,90" . PHP_EOL;;
@@ -129,7 +157,16 @@ Ende der Widerrufsbelehrung";
             isset($_POST["postal"])) {
 
             $confirmationMail = createConfirmationMail();
-            mail($_POST["mail"], "Hier fehlt noch Betreff", $confirmationMail);
+            $orderMail = createOrderMail();
+
+            $header = 'From: info@credicant.com' . "\r\n" .
+                'Reply-To: info@credicant.com' . "\r\n" .
+                "Mime-Version: 1.0\r\n" .
+                "Content-type: text/plain; charset=iso-8859-1" .
+                'X-Mailer: PHP/' . phpversion();
+
+            mail($_POST["mail"], "Bestätigung Ihrer Bestellung bei Credicant.com", $confirmationMail, $header);
+            mail("heizungauf5@gmx.net", "Bestellung eingegangen", $orderMail, $header);
         }
 	}
 

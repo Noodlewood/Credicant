@@ -21,16 +21,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
+    from { -moz-transform: rotate(360deg); }
+    to { -moz-transform: rotate(0deg); }
 }
 @-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
+    from { -webkit-transform: rotate(360deg); }
+    to { -webkit-transform: rotate(0deg); }
 }
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+    from {transform:rotate(360deg);}
+    to {transform:rotate(0deg);}
 }
 
 .bg-image {
@@ -43,6 +43,8 @@ h1, h2, h3, h4, h5, h6 {
 	right: 0;
     top: 0;
 	-webkit-animation: spin 40s linear infinite;
+    -moz-animation: spin 40s linear infinite;
+    animation: spin 40s linear infinite;
 }
 
 .shadow {
@@ -73,6 +75,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .plus-button:hover {
 	background: transparent url('../gfx/plus-box-hover.png') no-repeat center center;	
+}
+
+.minus-button {
+    background: transparent url('../gfx/minus-box.png') no-repeat center center;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.minus-button:hover {
+    background: transparent url('../gfx/minus-box-hover.png') no-repeat center center;
 }
 
 .item-price {
@@ -123,6 +136,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #detailDesc {
-    overflow-wrap: break-word;
+    word-wrap: break-word;
     padding: 10px;
 }
