@@ -100,6 +100,16 @@ h1, h2, h3, h4, h5, h6 {
 	background: transparent url('../gfx/cart-hover.png') no-repeat right center;	
 }
 
+#shoppingCartDetail {
+    margin-right: 10px;
+    height: 24px;
+    background: transparent url('../gfx/cart.png') no-repeat right center;
+}
+
+#shoppingCartDetail:hover {
+    background: transparent url('../gfx/cart-hover.png') no-repeat right center;
+}
+
 .item-desc {
 	display: none;
 }

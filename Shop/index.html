@@ -46,7 +46,7 @@
 
                                     <div class="row opac">
 
-                                        <img  class="large-2 small-6 columns" src="">
+                                        <img  class="large-2 small-6 columns" src="resources/gfx/shop_owner.jpg">
                                         <div class="large-10 small-6 columns ">
                                             <strong><div>This Site Is Managed By</div><hr/></strong>
                                             <div>Hi, mein Name ist Flo, ich starte hier ein Projekt, bei dem ich immer auf der Suche nach
@@ -121,7 +121,7 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label>Mail
+                            <label>E-Mail Adresse
                                 <input type="email" name="mail" required/>
                             </label>
                         </div>
@@ -375,7 +375,7 @@
         <div class="small-6 columns">
             <div class="row">
                 <div class="small-12 columns text-center">
-                    <img src="" id="detailPicture" />
+                    <a href="" target="_blankf"><img src="" id="detailPicture" /></a>
                 </div>
             </div>
             <div class="row">
@@ -399,9 +399,11 @@
                 <div class="small-6 columns item-margin">
                     <h2 id="detailPrice"></h2>
                     <div class="small-text">keine MwSt Ausweiß gem. § 19 UStG</div>
+                    <a class="small-text" href="#" data-reveal-id="shippingModal">zzgl. 6,90€ Versandkosten</a>
                 </div>
                 <div class="small-6 columns item-margin text-right">
-                    <button id="detailAdd" class="add-to-cart primary small radius">+1</button>
+                    <button id="detailAdd" style="margin-top: 10px;" class="add-to-cart primary small radius">+1</button>
+                    <a href="#" class="go-to-cart" data-reveal-id="cartModal"><div id="shoppingCartDetail"></div> </a>
                 </div>
             </div>
         </div>
@@ -544,7 +546,7 @@
                     cartModalItems.append(row);
 
                     row = $('<div></div>').addClass("row");
-                    title = $('<a href="#" data-reveal-id="shippingModal"></a>').addClass("large-12 columns small-text text-right").text("zzgl. Versandkosten");
+                    title = $('<a href="#" data-reveal-id="shippingModal"></a>').addClass("large-12 columns small-text text-right").text("zzgl. 6,90€ Versandkosten");
                     outer.append(title);
                     row.append(outer);
                     cartModalItems.append(row);
@@ -584,6 +586,7 @@
 
                 var setDetailPicture = function (picture) {
                     $('#detailPicture').prop('src', picture.src);
+                    $('#detailPicture').parent('a').prop('href', picture.src);
                 };
 
                 var addDetailThumbs = function (thumbs) {
