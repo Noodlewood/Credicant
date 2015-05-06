@@ -443,8 +443,8 @@
                     shopItemValue.text(product.price);
                     shopItemPicture.attr('src', product.pictures[0].src);
                     shopItemDescription.text(product.desc);
-                    shopItemAdd.attr('id', product.id);
-                    shopItemInner.attr('id', product.id);
+                    shopItemAdd.attr('productId', product.id);
+                    shopItemInner.attr('productId', product.id);
                     shopItemOuter.clone().appendTo($('.item-list'));
 
                     products[product.id] = product;
@@ -462,7 +462,7 @@
                 var sum = 0;
 
                 $('.add-to-cart').click(function (e) {
-                    var productId = $(this).attr('id');
+                    var productId = $(this).attr('productId');
                     var flag = false;
                     $.each(shoppingItems, function(index, item) {
                         if (item.id == productId) {
@@ -603,7 +603,7 @@
                 };
 
                 $('.shopping-item').click(function () {
-                    var product = products[$(this).attr('id')];
+                    var product = products[$(this).attr('productId')];
                     var title = product.title;
                     var desc = product.desc;
                     var price = product.price;
@@ -611,7 +611,7 @@
                     $('#detailTitle').text(title);
                     $('#detailDesc').text(desc);
                     $('#detailPrice').text(price + " €");
-                    $('#detailAdd').attr('id', product.id);
+                    $('#detailAdd').attr('productId', product.id);
 
                     setDetailPicture(product.pictures[0]);
                     addDetailThumbs(product.pictures);
