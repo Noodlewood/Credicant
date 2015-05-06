@@ -168,7 +168,7 @@ Ende der Widerrufsbelehrung";
                 'X-Mailer: PHP/' . phpversion();
 
             mail($_POST["mail"], "Vielen Dank für Ihre Bestellung bei Credicant!", $confirmationMail, $header);
-            mail("heizungauf5@gmx.net", "Bestellung eingegangen", $orderMail, $header);
+            mail("info@credicant.com", "Bestellung eingegangen", $orderMail, $header);
         }
 	}
 

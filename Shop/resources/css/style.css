@@ -1,6 +1,6 @@
 body {
-	font-family: 'Oswald', Arial, Verdana, sans-serif;	
-	margin-top: 50px;
+	font-family: 'Oswald', Arial, Verdana, sans-serif;
+    padding-top: 100px;
 }
 
 html, body {
@@ -19,6 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 .margin-top {
     margin-top: 25px;
 }
+
 
 @-moz-keyframes spin {
     from { -moz-transform: rotate(360deg); }
@@ -135,9 +136,8 @@ h1, h2, h3, h4, h5, h6 {
     height: 100px;
     background: transparent none no-repeat center center;
     background-size: contain;
-    border: 1px solid black;
     display: inline-block;
-    margin: 5px;
+    margin: 0 5px 10px 0;
     cursor: pointer;
 }
 
@@ -147,5 +147,8 @@ h1, h2, h3, h4, h5, h6 {
 
 #detailDesc {
     word-wrap: break-word;
-    padding: 10px;
+}
+
+#detailThumbs {
+    margin-top: 20px;
 }

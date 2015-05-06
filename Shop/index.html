@@ -46,10 +46,9 @@
 
                                     <div class="row opac">
 
-                                        <img  class="large-2 small-6 columns" src="resources/gfx/shop_owner.jpg">
-                                        <div class="large-10 small-6 columns ">
-                                            <strong><div>This Site Is Managed By</div><hr/></strong>
-                                            <div>Hi, mein Name ist Flo, ich starte hier ein Projekt, bei dem ich immer auf der Suche nach
+                                        <img  class=" small-6 columns site-owner-picture" src="resources/gfx/shop_owner.jpg">
+                                        <div class=" small-6 columns ">
+                                            <div>Hi, mein Name ist Flo. ich starte hier ein Projekt, bei dem ich immer auf der Suche nach
                                                 neuen, abgefahrenen Dingen bin. Schon immer hatte ich ein großes Interesse für Produkte,
                                                 die mich faszinieren. Diese mussten mich durch Aussehen, Qualität und praktischem Nutzen
                                                 überzeugen. Meine Begeisterung möchte ich nun mit Euch auf dieser Plattform teilen.</div>
@@ -372,7 +371,7 @@
 </div>
 <div id="detailModal" class="reveal-modal" data-reveal aria-labelledby="detailTitle" aria-hidden="true" role="dialog">
     <div class="row">
-        <div class="small-6 columns">
+        <div class="small-4 columns">
             <div class="row">
                 <div class="small-12 columns text-center">
                     <a href="" target="_blankf"><img src="" id="detailPicture" /></a>
@@ -384,7 +383,7 @@
                 </div>
             </div>
         </div>
-        <div class="small-6 columns">
+        <div class="small-8 columns">
             <div class="row">
                 <div class="small-12 columns item-margin">
                     <h2 id="detailTitle"></h2>
@@ -591,14 +590,15 @@
 
                 var addDetailThumbs = function (thumbs) {
                     var thumbsOuter = $('#detailThumbs');
+                    thumbsOuter.empty();
                     $.each(thumbs, function (index, thumb) {
-                        var thumbInner = $('<div></div>')
-                                .css('background-image', 'url(' + thumb.src + ')')
-                                .addClass('detail-thumb')
-                                .click(function () {
-                                    setDetailPicture(thumb);
-                                })
-                                .appendTo(thumbsOuter);
+                        $('<div></div>')
+                            .css('background-image', 'url(' + thumb.src + ')')
+                            .addClass('detail-thumb')
+                            .click(function () {
+                                setDetailPicture(thumb);
+                            })
+                            .appendTo(thumbsOuter);
                     })
                 };
 

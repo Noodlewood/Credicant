@@ -1,83 +1,13 @@
 {
-	"products":[{
-		"id": 1,
-		"title": "Kafee",
-		"price": 14.00,
-		"pictures":[{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/yogo.jpg"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/yogo.jpg"
-        }],
-		"desc": "sdlkfjskldjfjfsasalökdjfjasfdj"
-	}, {
-		"id": 2,
-		"title": "Yoga",
-		"price": 42.00,
-        "pictures":[{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        }],
-		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
-	}, {
-		"id": 3,
-		"title": "Yoga",
-		"price": 42.00,
-        "pictures":[{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        }],
-		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
-	}, {
-		"id": 4,
-		"title": "Yoga",
-		"price": 42.00,
-        "pictures":[{
-          "src": "resources/gfx/yogo.jpg"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        }],
-		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
-	}, {
-		"id": 5,
-		"title": "Yoga",
-		"price": 42.00,
-        "pictures":[{
-          "src": "resources/gfx/yogo.jpg"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        },{
-          "src": "resources/gfx/coffee-straight.png"
-        }],
-		"desc": "sdlkfjskldjfjfsasalökdjfjsdfasfssafsafsdfsafsfasfdsafasdfsadfsdfsfsafasadfasfdj"
-	}]
+	"products":[
+        {
+          "id": 1,
+          "title": "Der Gerät",
+          "price": 99.99,
+          "pictures":[{
+            "src": "productphotos/produkt-foto-1.png"
+          }],
+          "desc": "Der Gerät wird nie müde! Der Gerät schläft nie ein! Der Gerät ist immer vor der Chef im Geschäft... und schneidet das Dönerfleisch schweißfrei! :D "
+        }
+    ]
 }
