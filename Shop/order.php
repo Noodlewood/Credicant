@@ -51,7 +51,7 @@ Auftragsbestätigung
             }
         }
 
-        $shippingFee = 6.90;
+        $shippingFee = 5.90;
         $sum += $shippingFee;
         $mail .= "Versandkosten: EUR " . $shippingFee . PHP_EOL;;
         $mail .= "Gesamtpreis: EUR " . $sum . PHP_EOL;
@@ -168,7 +168,7 @@ Ende der Widerrufsbelehrung";
                 'X-Mailer: PHP/' . phpversion();
 
             mail($_POST["mail"], "Vielen Dank für Ihre Bestellung bei Credicant!", $confirmationMail, $header);
-            mail("info@credicant.com", "Bestellung eingegangen", $orderMail, $header);
+            mail("heizungauf5@gmx.net", "Bestellung eingegangen", $orderMail, $header);
         }
 	}
 

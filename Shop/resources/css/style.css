@@ -20,6 +20,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 25px;
 }
 
+.alert-box {
+    position: absolute;
+    top: 50%;
+    z-index: 10000;
+    width: 1000px;
+    text-align: center;
+}
 
 @-moz-keyframes spin {
     from { -moz-transform: rotate(360deg); }
