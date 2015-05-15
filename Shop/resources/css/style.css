@@ -109,9 +109,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #shoppingCartDetail {
-    margin-right: 10px;
     height: 24px;
     background: transparent url('../gfx/cart.png') no-repeat right center;
+    padding-right: 30px;
+    font-size: 12px;
+    padding-top: 3px;
 }
 
 #shoppingCartDetail:hover {

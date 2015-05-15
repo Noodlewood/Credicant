@@ -26,6 +26,15 @@ CRC.views.ProductDetailView = Class.extend(CRC.util.Observable, {
     _setContent: function(product) {
         $('#detailTitle').text(this._product.getTitle());
         $('#detailDesc').text(this._product.getDescription());
+
+        var keywords =  $('#detailKeywords');
+        keywords.empty();
+        if (this._product.getKeywords().length > 0) {
+            $.each(this._product.getKeywords(), function(index, keyword) {
+                $('<li></li>').text(keyword).appendTo(keywords);
+            });
+        }
+
         $('#detailPrice').text(this._product.getPrice() + " €");
     },
 

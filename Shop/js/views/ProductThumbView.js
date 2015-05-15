@@ -4,34 +4,40 @@ CRC.views.ProductThumbView = Class.extend(CRC.util.Observable, {
     initialize: function(product) {
 
         this.shopItemOuter = $('<a class="large-4 small-6 columns"  href="#" data-reveal-id="detailModal"></a>');
-        var shopItemInner = $('<div class="shadow opac"></div>');
-        var shopItemPicture = $('<img class="item-pic" src="">');
-        var shopItemDescription = $('<div class="item-desc"></div>');
-        var shopItemTitle = $('<h5 class="item-title"></h5>');
-        var shopItemValue = $('<h6 class="subheader item-price"></h6>');
-        var shopItemPanel = $('<div class="panel"></div>');
-        var shopItemAdd = $('<div class="plus-button shadow-small"></div>');
+        var inner = $('<div class="shadow opac"></div>');
+        var picture = $('<img class="item-pic" src="">');
+        var title = $('<h5 class="item-title"></h5>');
+        var keywords = $('<ul></ul>');
+        var price = $('<h6 class="subheader item-price"></h6>');
+        var panel = $('<div class="panel"></div>');
+        var addBtn = $('<div class="plus-button shadow-small"></div>');
 
-        this.shopItemOuter.append(shopItemInner)
-            .append(shopItemAdd);
-        shopItemInner.append(shopItemPicture)
-            .append(shopItemDescription)
-            .append(shopItemPanel);
-        shopItemPanel.append(shopItemTitle)
+        $.each(product.getKeywords(), function(index, keyword) {
+           $('<li></li>').text(keyword).appendTo(keywords);
+        });
+
+        this.shopItemOuter
+            .append(inner)
+            .append(addBtn);
+        inner
+            .append(picture)
+            .append(panel);
+        panel
+            .append(title)
+            .append(keywords)
             .append('&nbsp;€')
-            .append(shopItemValue);
+            .append(price);
 
-        shopItemTitle.text(product.getTitle());
-        shopItemValue.text(product.getPrice());
-        shopItemPicture.attr('src', product.getThumb());
-        shopItemDescription.text(product.getDescription());
+        title.text(product.getTitle());
+        price.text(product.getPrice());
+        picture.attr('src', product.getThumb());
 
         var me = this;
-        shopItemAdd.click(function() {
+        addBtn.click(function() {
             me.fireEvent('addToCartClicked', [product]);
             return false;
         });
-        shopItemInner.click(function() {
+        inner.click(function() {
             me.fireEvent('productClicked', [product]);
         })
     },

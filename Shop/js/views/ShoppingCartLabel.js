@@ -24,6 +24,12 @@ CRC.views.ShoppingCartLabel = Class.extend(CRC.util.Observable, {
     },
 
     _updateText: function() {
-        this._label.text(this._count + " Waren im Korb");
+        if (this._count > 1) {
+            this._label.text(this._count + " Waren im Korb");
+        } else if (this._count == 1) {
+            this._label.text(this._count + " Ware im Korb");
+        } else if (this._count < 1) {
+            this._label.text("Keine Waren im Korb");
+        }
     }
 });

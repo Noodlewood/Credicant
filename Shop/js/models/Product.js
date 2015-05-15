@@ -6,11 +6,11 @@ CRC.model.Product = Class.extend({
         this._title = productJSON.title;
         this._price = productJSON.price;
         this._description = productJSON.desc;
-        this._pictures = [];
-        var me = this;
-        $.each(productJSON.pictures, function(index, pic) {
-            me._pictures.push(pic.src);
-        })
+        this._keywords = [];
+        if (productJSON.keywords) {
+            this._keywords = productJSON.keywords;
+        }
+        this._pictures = productJSON.pictures;
     },
 
     getId: function() {
@@ -31,6 +31,10 @@ CRC.model.Product = Class.extend({
 
     getPictures: function() {
         return this._pictures;
+    },
+
+    getKeywords: function() {
+        return this._keywords;
     },
 
     getThumb: function() {
