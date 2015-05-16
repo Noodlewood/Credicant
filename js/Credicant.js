@@ -1,97 +1,98 @@
 $(document).ready(function() {
-	CRC.Credicant.instance = new CRC.Credicant();
+    $(document).foundation();
+    CRC.Credicant.instance = new CRC.Credicant();
 });
 
 CRC.ns('CRC');
 CRC.Credicant = Class.extend(CRC.util.Observable, {
-	
-	initialize: function() {
-		this._sectionHeight = window.innerHeight;
-		this._isAnimation = false;
 
-		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
+    initialize: function () {
+        var db = new CRC.controller.Database();
+        db.addListener('productsLoaded', this._productsLoaded, this);
 
-		if (document.attachEvent)
-			document.attachEvent("on"+mousewheelevt, this._onMouseWheel);
-		else if (document.addEventListener)
-			document.addEventListener(mousewheelevt, this._onMouseWheel, false);
+        this._shoppingCartLabel = new CRC.views.ShoppingCartLabel();
+        this._shoppingCartLabel.addListener('goToCartClicked', this._goToCart, this);
 
-		this._bodyHeight = 0;
-		this.credicant = $('.credicant');
-		this.header = new CRC.views.Header();
+        this._productDetail = new CRC.views.ProductDetailView();
+        this._productDetail.addListener('addToCartClicked', this._addProductToCart, this);
+        this._productDetail.addListener('goToCartClicked', this._revealCart, this);
 
-		this._colorscroller = new CRC.views.Colorscroller(this._sectionHeight);
-        this.addListener('documentScroll', this._colorscroller.onDocumentScroll, this._colorscroller);
+        this._shoppingCart = new CRC.views.ShoppingCartView();
+        this._shoppingCart.addListener('productRemoved', this._productRemovedFromCart, this);
+        this._shoppingCart.addListener('submitClicked', this._submitOrder, this);
 
-		this.header.appendTo(this.credicant);
-		this.header.moveIn();
-
-		$(document).scroll($.proxy(this._onDocumentScroll, this));
-
-		var logo = $('<div></div>')
-			.addClass('logo-big');
-		this.addSection(logo, '#ffffff');
-
-		var text = new CRC.views.content.FadeTextWithImage('beans-shadow', this._sectionHeight);
-		this.addSection(text, '#ff3500');
-		text.addTextBar("Lorem Ipsum", "right", 50);
-		text.addTextBar("Lorem Ipsum", "left", 150);
-		text.addTextBar("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,", "left", 200);
-
-		var logo3 = $('<div></div>')
-			.addClass('logo-big')
-		this.addSection(logo3, '#086fa1');
-
-		var logo4 = $('<div></div>')
-			.addClass('logo-big')
-		this.addSection(logo4, '#6ce155');
-
-		simpleCart({
-			checkout: { 
-				type: "PayPal" , 
-				email: "you@yours.com" 
-			}
-		});	
-
+        $('.alert-box').hide();
     },
 
-	addSection: function(content, bgColor, btnStyle) {
+    _productsLoaded: function(products) {
+        var me = this;
+        var itemList = $('.item-list');
+        $.each(products, function(index, product) {
+            var thumbView = new CRC.views.ProductThumbView(product);
+            thumbView.addListener('addToCartClicked', me._addProductToCart, me);
+            thumbView.addListener('productClicked', me._showProductDetail, me);
+            thumbView.appendTo(itemList);
+        });
 
-        var naviBtn = new CRC.views.Navibutton();
-        this.header.appendButton(naviBtn);
-        if (btnStyle) naviBtn.setActiveStyle(btnStyle);
-        naviBtn.setScrollPos(this._bodyHeight);
+        $('.opac').hover(function () {
+            $(this).css('opacity', 1);
+        }, function () {
+            $(this).css('opacity', 0.9);
+        });
+    },
 
-		var section = new CRC.views.Section(content, naviBtn, this._sectionHeight);
-		section.appendTo(this.credicant);
+    _addProductToCart: function(product) {
+        this._shoppingCartLabel.increase();
+        this._shoppingCart.addProduct(product);
+    },
 
-        this._colorscroller.addColor(bgColor);
+    _goToCart: function() {
+        this._shoppingCart.update();
+    },
 
-		this.addListener('documentScroll', section.onDocumentScroll, section);
+    _revealCart: function() {
+        this._shoppingCart.update();
+        $('#cartModal').foundation('reveal', 'open');
+    },
 
-		this._bodyHeight += this._sectionHeight;
-		$('body').css('min-height', this._bodyHeight+"px");
-	},
+    _showProductDetail: function(product) {
+        this._productDetail.update(product);
+    },
 
-	_onDocumentScroll: function(e) {
-		var scrollTop = $(e.currentTarget).scrollTop();
-		this.fireEvent('documentScroll', [scrollTop]);
-	},
+    _productRemovedFromCart: function() {
+        this._shoppingCartLabel.decrease();
+        this._shoppingCart.update();
+    },
 
-	_onMouseWheel: function(e) {
-		e.preventDefault();
-		if (this._isAnimation) return;
+    _submitOrder: function(shoppingItems) {
+        var forenameField = $("input[name='forename']");
+        var surnameField = $("input[name='surname']");
+        var streetField = $("input[name='street']");
+        var cityField = $("input[name='city']");
+        var postalField = $("input[name='postal']");
+        var mailField = $("input[name='mail']");
 
-		var e = window.event || e; // old IE support
-		var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-		var currentPos = $("html, body").scrollTop();
-		var newPos = currentPos + (-delta * window.innerHeight);
-		this._isAnimation = true;
+        var forename = forenameField.val();
+        var surname = surnameField.val();
+        var street = streetField.val();
+        var city = cityField.val();
+        var postal = postalField.val();
+        var mail = mailField.val();
 
-		$("html, body").animate({
-			scrollTop: newPos + "px"
-		}, 250, $.proxy(function() {
-			this._isAnimation = false;
-		}, this));
-	}
+        $.post('order.php', {
+                order: shoppingItems,
+                forename: forename,
+                surname: surname,
+                street: street,
+                city: city,
+                postal: postal,
+                mail: mail
+            }, function (response) {
+                $('#cartModal').foundation('reveal', 'close');
+                $('.alert-box.success').show().delay(2000).fadeOut();
+        }).fail(function() {
+            $('#cartModal').foundation('reveal', 'close');
+            $('.alert-box.alert').show().delay(2000).fadeOut();
+        });
+    }
 });

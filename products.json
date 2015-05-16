@@ -1,0 +1,67 @@
+{
+	"products":[
+        {
+          "id": 1,
+          "title": "Kaffee",
+          "price": 14,
+          "keywords": [
+            "hauseigene Kaffeemarke",
+            "Naturfreundlich und fair produziert",
+            "in schonenden Mengen langzeit-geröstet"
+          ],
+          "pictures":[
+            "productphotos/Kaffee/coffee-straight.png",
+            "productphotos/Kaffee/Bild2.jpg",
+            "productphotos/Kaffee/Bild3.jpg",
+            "productphotos/Kaffee/Bild4.jpg",
+            "productphotos/Kaffee/Bild5.jpg",
+            "productphotos/Kaffee/Bild6.jpg",
+            "productphotos/Kaffee/Bild7.jpg",
+            "productphotos/Kaffee/Bild8.jpg",
+            "productphotos/Kaffee/Bild9.jpg"
+          ],
+          "desc": "Wir unterstützen Kleinbauern mit dem Projekt <a target='_blank' href='http://www.bobolinkcoffee.com/Coffee.asp'>Bob-o-link Coffee</a><br /><br />Großartig,<br /><br />Sie und das braune Gold ...<br /><br />... schon gekostet?<br /><br />Wie entfaltet sich das flüssige Gold auf Ihrer Zunge? Empfinden Sie ein wohliges Gefühl? Schließen Sie ruhig einmal die Augen und nehmen Sie den Geschmack bewusst in sich auf! ... Na, was schmecken Sie?<br /><br />Wissen Sie eigentlich, was Sie sich gerade Gutes getan haben?<br /><ul><li>Sie haben sich Zeit für sich genommen.</li><li>Sie haben einen Kaffee getrunken, der im Einklang von Natur und Mensch erschaffen wurde.</li><li>Er wurde für Sie mit viel Sorgfalt, handwerklich und in kleinen Mengen schonend geröstet.</li></ul>Daten:<br /><br />Natrufreundlich produziert & Fair gehandelt<br /><br />100% Arabica - Brasilien, Mococa Aromen von dunkler Schokolade und Nüssen, mild, säurearm sonnengetrocknet, ca. 1100m hoch angebaut<br /><br />In Zusammenarbeit mit <a href='http://www.anne-kaffeekanne.de' target='_blank'>www.anne-kaffeekanne.de</a>"
+        },
+      {
+        "id": 2,
+        "title": "Espresso",
+        "price": 14,
+        "keywords": [
+          "hauseigene Kaffeemarke",
+          "Naturfreundlich und fair produziert",
+          "in schonenden Mengen langzeit-geröstet"
+        ],
+        "pictures":[
+          "productphotos/Kaffee/bild1.png",
+          "productphotos/Kaffee/Bild2.jpg",
+          "productphotos/Kaffee/Bild3.jpg",
+          "productphotos/Kaffee/Bild4.jpg",
+          "productphotos/Kaffee/Bild5.jpg",
+          "productphotos/Kaffee/Bild6.jpg",
+          "productphotos/Kaffee/Bild7.jpg",
+          "productphotos/Kaffee/Bild8.jpg",
+          "productphotos/Kaffee/Bild9.jpg"
+        ],
+        "desc": "Wir unterstützen Kleinbauern mit dem Projekt <a target='_blank' href='http://www.bobolinkcoffee.com/Coffee.asp'>Bob-o-link Coffee</a><br /><br />Großartig,<br /><br />Sie und das braune Gold ...<br /><br />... schon gekostet?<br /><br />Wie entfaltet sich das flüssige Gold auf Ihrer Zunge? Empfinden Sie ein wohliges Gefühl? Schließen Sie ruhig einmal die Augen und nehmen Sie den Geschmack bewusst in sich auf! ... Na, was schmecken Sie?<br /><br />Wissen Sie eigentlich, was Sie sich gerade Gutes getan haben?<br /><ul><li>Sie haben sich Zeit für sich genommen.</li><li>Sie haben einen Kaffee getrunken, der im Einklang von Natur und Mensch erschaffen wurde.</li><li>Er wurde für Sie mit viel Sorgfalt, handwerklich und in kleinen Mengen schonend geröstet.</li></ul>Daten:<br /><br />Natrufreundlich produziert & Fair gehandelt<br /><br />75% Arabica Brasilien, Aromen von dunkler Schockolade und Nüssen, mild säurearm, sonnengetrocknet, ca. 1100m hoch angebaut<br /><br />25% Robusta Kamerun. Kräftig, fein würzig, sonnengetrocket, ca. 850m hoch angebaut<br /><br />In Zusammenarbeit mit <a href='http://www.anne-kaffeekanne.de' target='_blank'>www.anne-kaffeekanne.de</a>"
+      },
+      {
+        "id": 3,
+        "title": "Yogo - Die Reiseyogamatte",
+        "price": 80,
+        "keywords": [
+          "Praktisch und kompakt",
+          "Naturfeundlich",
+          "100% recyclebar"
+        ],
+        "pictures":[
+          "productphotos/Yoga/Bild1.jpg",
+          "productphotos/Yoga/Bild2.jpg",
+          "productphotos/Yoga/Bild3.jpg",
+          "productphotos/Yoga/Bild4.jpg",
+          "productphotos/Yoga/Bild5.jpg",
+          "productphotos/Yoga/Bild6.jpg"
+        ],
+        "desc": "Yoga to go<br /><br />Du machst gerne Yoga, bist viel unterwegs und reist gerne?<br /><br />Dann ist diese Matte genau das Richtige für dich. Sie ist leicht, kompakt, rutschfest, sieht gut aus und passt dabei in jede Tasche.<br />Zusammengefaltet ist sie so groß wie eine Zeitung. Hergestellt wird sie aus 100% recylebaren Naturkautschuk. Die einfache Faltung geht kinderleicht und wird durch intergrierte und widerstandsfähige Schlaufen gehalten. Dabei deutlich hygienischer als herkömmliche Matten, da sich Unter- und Oberseite nie berühren. Zur Reinigung in die Dusche an den zwei Laschen aufhängen und abspritzen.<br /><br />Zusätlich unterstützt du mit jedem Kauf die Neubepflanzung eines Baumes auf unserer Welt. So bist du auch gleich umweltbewusst.<br /><br />Yoga für einen bewussten Wandel in Dir und im Außen!<br /><br />Daten:<ul><li>Aus umweltfreundlicher, natürlich abbaubarer Naturkautschuk</li><li>Dicke: 1,5 mm</li><li>Nur 1,0 kg</li><li>Größe - offen: 61 cm x 173 cm</li><li>Größe - zusammengefaltet: 30,5 cm x 8 cm x 12 cm</li><li>Beide Seiten extrem rutschfest, da der Gummi durch ein spezielles Baumwollnetz gedrückt wird.</li></ul>"
+      }
+    ]
+}
