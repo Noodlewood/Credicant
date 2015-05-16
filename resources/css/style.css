@@ -21,6 +21,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .alert-box {
+    display: none;
     position: absolute;
     top: 50%;
     z-index: 10000;
@@ -53,6 +54,10 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-animation: spin 40s linear infinite;
     -moz-animation: spin 40s linear infinite;
     animation: spin 40s linear infinite;
+}
+
+.main {
+    display: none;
 }
 
 .shadow {
@@ -98,6 +103,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .item-price {
     float: left;
+}
+
+.item-pic {
+    width: 100%;
 }
 
 .shopping-cart-icon {
@@ -148,7 +157,6 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     margin: 0 5px 10px 0;
     cursor: pointer;
-    border: 1px solid black;
 }
 
 .detail-thumb:hover {
@@ -161,8 +169,4 @@ h1, h2, h3, h4, h5, h6 {
 
 #detailThumbs {
     margin-top: 20px;
-}
-
-#detailPicture {
-    border: 1px solid black;
 }

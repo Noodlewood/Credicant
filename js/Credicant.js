@@ -20,8 +20,6 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
         this._shoppingCart = new CRC.views.ShoppingCartView();
         this._shoppingCart.addListener('productRemoved', this._productRemovedFromCart, this);
         this._shoppingCart.addListener('submitClicked', this._submitOrder, this);
-
-        $('.alert-box').hide();
     },
 
     _productsLoaded: function(products) {
@@ -39,6 +37,8 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
         }, function () {
             $(this).css('opacity', 0.9);
         });
+
+        $('.main').fadeIn();
     },
 
     _addProductToCart: function(product) {
