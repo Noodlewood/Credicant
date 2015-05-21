@@ -10,7 +10,7 @@ CRC.views.ShoppingCartLabel = Class.extend(CRC.util.Observable, {
         });
 
         this._label = $(el.children()[0]);
-        console.log(this._label)
+
         this._count = 0;
     },
 

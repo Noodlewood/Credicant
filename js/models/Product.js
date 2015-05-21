@@ -1,16 +1,20 @@
 CRC.ns('CRC.model.Product');
 CRC.model.Product = Class.extend({
 
-    initialize: function(productJSON) {
-        this._id = productJSON.id;
-        this._title = productJSON.title;
-        this._price = productJSON.price;
-        this._description = productJSON.desc;
+    initialize: function(title, price, desc, keywords, pictures, id) {
+
+        this._id = id;
+        this._title = title;
+        this._price = price;
+        this._description = desc;
         this._keywords = [];
-        if (productJSON.keywords) {
-            this._keywords = productJSON.keywords;
+        this._pictures = [];
+        if (keywords) {
+            this._keywords = keywords;
         }
-        this._pictures = productJSON.pictures;
+        if (pictures) {
+            this._pictures = pictures;
+        }
     },
 
     getId: function() {

@@ -23,7 +23,7 @@ CRC.views.ProductDetailView = Class.extend(CRC.util.Observable, {
         this._addDetailThumbs(this._product.getPictures());
     },
 
-    _setContent: function(product) {
+    _setContent: function() {
         $('#detailTitle').text(this._product.getTitle());
         $('#detailDesc').html(this._product.getDescription());
 

@@ -7,8 +7,9 @@ CRC.ns('CRC');
 CRC.Credicant = Class.extend(CRC.util.Observable, {
 
     initialize: function () {
-        var db = new CRC.controller.Database();
-        db.addListener('productsLoaded', this._productsLoaded, this);
+        this._db = new CRC.controller.Database();
+        this._db.addListener('productsLoaded', this._productsLoaded, this);
+        this._db.loadProducts();
 
         this._shoppingCartLabel = new CRC.views.ShoppingCartLabel();
         this._shoppingCartLabel.addListener('goToCartClicked', this._goToCart, this);
@@ -23,9 +24,11 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
     },
 
     _productsLoaded: function(products) {
+        console.log(products)
         var me = this;
         var itemList = $('.item-list');
         $.each(products, function(index, product) {
+
             var thumbView = new CRC.views.ProductThumbView(product);
             thumbView.addListener('addToCartClicked', me._addProductToCart, me);
             thumbView.addListener('productClicked', me._showProductDetail, me);
@@ -64,29 +67,16 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
         this._shoppingCart.update();
     },
 
-    _submitOrder: function(shoppingItems) {
-        var forenameField = $("input[name='forename']");
-        var surnameField = $("input[name='surname']");
-        var streetField = $("input[name='street']");
-        var cityField = $("input[name='city']");
-        var postalField = $("input[name='postal']");
-        var mailField = $("input[name='mail']");
-
-        var forename = forenameField.val();
-        var surname = surnameField.val();
-        var street = streetField.val();
-        var city = cityField.val();
-        var postal = postalField.val();
-        var mail = mailField.val();
+    _submitOrder: function(order, shoppingItems) {
 
         $.post('order.php', {
                 order: shoppingItems,
-                forename: forename,
-                surname: surname,
-                street: street,
-                city: city,
-                postal: postal,
-                mail: mail
+                forename: order.getFirstname(),
+                surname: order.getSurname(),
+                street: order.getStreet(),
+                city: order.getCity(),
+                postal: order.getPostal(),
+                mail: order.getMail()
             }, function (response) {
                 $('#cartModal').foundation('reveal', 'close');
                 $('.alert-box.success').show().delay(2000).fadeOut();
@@ -94,5 +84,7 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
             $('#cartModal').foundation('reveal', 'close');
             $('.alert-box.alert').show().delay(2000).fadeOut();
         });
+
+        this._db.addDBOrder(order);
     }
 });
