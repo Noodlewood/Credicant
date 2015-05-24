@@ -1,7 +1,8 @@
 CRC.ns('CRC.model.Order');
 CRC.model.Order = Class.extend({
 
-    initialize: function(firstname, surname, street, city, postal, mail, products) {
+    initialize: function(firstname, surname, street, city, postal, mail, products, number) {
+        this._number = number;
         this._firstname = firstname;
         this._surname = surname;
         this._street = street;
@@ -12,6 +13,10 @@ CRC.model.Order = Class.extend({
         if (products) {
             this._products = products;
         }
+    },
+
+    getNumber: function() {
+      return this._number;
     },
 
     getFirstname: function() {
@@ -40,14 +45,5 @@ CRC.model.Order = Class.extend({
 
     getProducts: function() {
         return this._products;
-    },
-
-    getProductIds: function() {
-        var productIds = [];
-        $.each(this._products, function(indxex, product) {
-            productIds.push(product.getId());
-        });
-
-        return productIds;
     }
 });

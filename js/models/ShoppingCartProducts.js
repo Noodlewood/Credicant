@@ -5,17 +5,8 @@ CRC.model.ShoppingCartProducts = Class.extend({
         this._products = [];
     },
 
-    getShoppingCartProducts: function() {
-        return this._products;
-    },
-
     getProducts: function() {
-        var products = [];
-        $.each(this._products, function(index, item) {
-            products.push(item.product);
-        });
-
-        return products;
+        return this._products;
     },
 
     getJSONProducts: function() {
@@ -23,6 +14,7 @@ CRC.model.ShoppingCartProducts = Class.extend({
         $.each(this._products, function(index, item) {
             products.push({
                 'count': item.count,
+                'id': item.product.getId(),
                 'title': item.product.getTitle(),
                 'price': item.product.getPrice()
             })

@@ -6,9 +6,12 @@
         $street = $_POST["street"];
         $city = $_POST["city"];
         $postal = $_POST["postal"];
+        $number = $_POST["number"];
 
         $mail =
 "Bestellung
+
+Bestellnummer: " .$number . "
 
 ";
         $sum = 0;
@@ -33,6 +36,7 @@
         $street = $_POST["street"];
         $city = $_POST["city"];
         $postal = $_POST["postal"];
+        $number = $_POST["number"];
 
         $mail =
 "Credicant
@@ -41,6 +45,9 @@ Ingeborg-Bachmann-Weg 2
 79111 Freiburg im Breisgau
 
 Auftragsbestätigung
+
+Bestellnummer: " .$number . "
+
 ";
 
         $sum = 0;
@@ -151,6 +158,7 @@ Ende der Widerrufsbelehrung";
 	    $form_data['posted'] = 'Data Was Posted Successfully';
 
         if (isset($_POST["mail"]) &&
+            isset($_POST["number"]) &&
             isset($_POST["order"]) &&
             isset($_POST["surname"]) &&
             isset($_POST["forename"]) &&

@@ -6,7 +6,7 @@ CRC.views.ShoppingCartView = Class.extend(CRC.util.Observable, {
 
         var me = this;
         $("#order").submit(function() {
-            me.fireEvent('submitClicked', [me._createOrder(), me._products.getJSONProducts()]);
+            me.fireEvent('submitClicked', [me._createOrder()]);
             event.preventDefault();
         })
     },
@@ -16,12 +16,12 @@ CRC.views.ShoppingCartView = Class.extend(CRC.util.Observable, {
         cartModalItems.empty();
         var me = this;
 
-        if (this._products.getShoppingCartProducts().length < 1) {
+        if (this._products.getProducts().length < 1) {
             cartModalItems.append($('<div></div>').text('Keine Waren im Korb').css('text-align', 'center'));
             return;
         }
 
-        $.each(this._products.getShoppingCartProducts(), function (index, item) {
+        $.each(this._products.getProducts(), function (index, item) {
                 var row = $('<div></div>').addClass("row");
                 var outer = $('<div></div>').addClass("small-12 columns item-margin");
                 var title = $('<div></div>').addClass("small-4 columns").text(item.count + " x " + item.product.getTitle());
@@ -96,6 +96,6 @@ CRC.views.ShoppingCartView = Class.extend(CRC.util.Observable, {
         var postal = postalField.val();
         var mail = mailField.val();
 
-        return new CRC.model.Order(forename, surname, street, city, postal, mail, this._products.getProducts());
+        return new CRC.model.Order(forename, surname, street, city, postal, mail, this._products.getJSONProducts());
     }
 });

@@ -1,21 +1,32 @@
 <?php
 
+$dbname = "d01e4dd1";
+
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
         case 'create' : create();break;
         case 'drop' : drop();break;
+        case 'recreate' : recreate();break;
         case 'addProduct' : addProduct();break;
-        case 'getShoppingCartProducts' : getProducts();break;
+        case 'getProducts' : getProducts();break;
         case 'addOrder' : addOrder();break;
         case 'getOrders' : getOrders();break;
+        case 'deleteProduct' : deleteProduct();break;
     }
 }
 
 function connect() {
+/*
+    $servername = "www.credicant.com";
+    $username = "d01e4dd1";
+    $password = "7JPMSXF3AEZEMH6H";
+*/
+
     $servername = "localhost";
     $username = "root";
     $password = "";
+
 
     $conn = new mysqli($servername, $username, $password);
     if ($conn->connect_error) {
@@ -26,12 +37,13 @@ function connect() {
 }
 
 function create() {
+    global $dbname;
     $conn = connect();
 
-    $sql = "CREATE DATABASE credicant";
+    $sql = "CREATE DATABASE " . $dbname;
     if ($conn->query($sql) === TRUE) {
         echo "Database created successfully" . PHP_EOL;
-        $conn->select_db("credicant");
+        $conn->select_db($dbname);
 
         $sql = "CREATE TABLE Products (
             p_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -62,7 +74,7 @@ function create() {
         $sql = "CREATE TABLE Pictures (
             pic_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             p_id int(6) UNSIGNED,
-            src VARCHAR(30) NOT NULL,
+            src VARCHAR(256) NOT NULL,
             FOREIGN KEY (p_id) REFERENCES Products(p_id)
         )";
 
@@ -91,6 +103,7 @@ function create() {
 
         $sql = "CREATE TABLE OrderItems (
             oi_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            productcount int(255) UNSIGNED,
             o_id int(6) UNSIGNED,
             p_id int(6) UNSIGNED,
             FOREIGN KEY (o_id) REFERENCES Orders(o_id),
@@ -112,9 +125,10 @@ function create() {
 }
 
 function drop() {
+    global $dbname;
     $conn = connect();
 
-    $sql = "DROP DATABASE credicant";
+    $sql = "DROP DATABASE " . $dbname;
     if ($conn->query($sql) === TRUE) {
         echo "Database dropped successfully" . PHP_EOL;
     } else {
@@ -124,10 +138,30 @@ function drop() {
     $conn->close();
 }
 
+function recreate() {
+    global $dbname;
+    $conn = connect();
+
+    if($conn->select_db($dbname)){
+        $sql = "DROP DATABASE " . $dbname;
+        if ($conn->query($sql) === TRUE) {
+            echo "Database dropped successfully" . PHP_EOL;
+            create();
+        } else {
+            echo "Error dropping database: " . $conn->error . PHP_EOL;
+        }
+    }else{
+        create();
+    }
+
+    $conn->close();
+}
+
 function addProduct() {
+    global $dbname;
 
     $conn = connect();
-    $conn->select_db("credicant");
+    $conn->select_db($dbname);
 
     $sql = "INSERT INTO Products (title, price, description) VALUES ('" . $_POST["title"] . "', " . $_POST["price"] . ", '" . $_POST["desc"] . "')";
 
@@ -158,18 +192,55 @@ function addProduct() {
     $conn->close();
 }
 
-function addOrder() {
+function deleteProduct() {
+    global $dbname;
 
     $conn = connect();
-    $conn->select_db("credicant");
+    $conn->select_db($dbname);
 
-    $sql = "INSERT INTO orders (orderdate, firstname, surname, street, city, postal, mail) VALUES ('" . date("Y-m-d") . "', '" . $_POST["firstname"] . "', '" . $_POST["surname"] . "', '" . $_POST["street"] . "', " . $_POST["city"] . "', " . $_POST["postal"] . ", '" . $_POST["mail"] . "')";
+    $sql = "DELETE FROM Keywords WHERE Keywords.p_id = " . $_POST["p_id"];
+    if ($conn->query($sql) === TRUE) {
+        echo "Keywords deleted successfully" . PHP_EOL;
+    } else {
+        echo "Error deleting from database: " . $conn->error . PHP_EOL;
+    }
+
+    $sql = "DELETE FROM Orderitems WHERE Orderitems.p_id = " . $_POST["p_id"];
+    if ($conn->query($sql) === TRUE) {
+        echo "OrderItems deleted successfully" . PHP_EOL;
+    } else {
+        echo "Error deleting from database: " . $conn->error . PHP_EOL;
+    }
+
+    $sql = "DELETE FROM Pictures WHERE Pictures.p_id = " . $_POST["p_id"];
+    if ($conn->query($sql) === TRUE) {
+        echo "Pictures deleted successfully" . PHP_EOL;
+    } else {
+        echo "Error deleting from database: " . $conn->error . PHP_EOL;
+    }
+
+    $sql = "DELETE FROM Products WHERE Products.p_id = " . $_POST["p_id"];
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Product deleted successfully" . PHP_EOL;
+    } else {
+        echo "Error deleting from database: " . $conn->error . PHP_EOL;
+    }
+    $conn->close();
+}
+
+function addOrder() {
+    global $dbname;
+    $conn = connect();
+    $conn->select_db($dbname);
+
+    $sql = "INSERT INTO Orders (orderdate, firstname, surname, street, city, postal, mail) VALUES ('" . date("Y-m-d") . "', '" . $_POST["firstname"] . "', '" . $_POST["surname"] . "', '" . $_POST["street"] . "', '" . $_POST["city"] . "', " . $_POST["postal"] . ", '" . $_POST["mail"] . "')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Order inserted successfully" . PHP_EOL;
         $id = $conn->insert_id;
-        foreach($_POST["products"] as $productId) {
-            $sql = "INSERT INTO OrderItems (o_id, p_id) VALUES (" . $id . ", " . $productId . ")";
+        foreach($_POST["products"] as $product) {
+            $sql = "INSERT INTO OrderItems (productcount, o_id, p_id) VALUES (" . $product['count'] . ", " . $id . ", " . $product['id'] . ")";
             $conn->query($sql);
         }
 
@@ -180,50 +251,58 @@ function addOrder() {
 }
 
 function getProducts() {
+    global $dbname;
     $conn = connect();
-    $conn->select_db("credicant");
+    $conn->select_db($dbname);
 
-    $sql = "SELECT * FROM products";
+    $sql = "SELECT * FROM Products";
     $result = $conn->query($sql);
 
-    $jsonData = array();
-    while ($array = $result->fetch_assoc()) {
-        $sql = "SELECT src FROM pictures WHERE pictures.p_id = " . $array["p_id"];
-        $presult = $conn->query($sql);
-        $array["pictures"] = [];
-        while ($parray = $presult->fetch_assoc()) {
-            array_push($array["pictures"], $parray["src"]);
+    if (is_object($result)) {
+
+        $jsonData = array();
+        while ($array = $result->fetch_assoc()) {
+            $sql = "SELECT src FROM Pictures WHERE Pictures.p_id = " . $array["p_id"];
+            $presult = $conn->query($sql);
+            $array["pictures"] = [];
+            while ($parray = $presult->fetch_assoc()) {
+                array_push($array["pictures"], $parray["src"]);
+            }
+
+            $sql = "SELECT title FROM Keywords WHERE Keywords.p_id = " . $array["p_id"];
+            $kresult = $conn->query($sql);
+            $array["keywords"] = [];
+            while ($karray = $kresult->fetch_assoc()) {
+                array_push($array["keywords"], $karray["title"]);
+            }
+
+            $jsonData[] = $array;
         }
 
-        $sql = "SELECT title FROM keywords WHERE keywords.p_id = " . $array["p_id"];
-        $kresult = $conn->query($sql);
-        $array["keywords"] = [];
-        while ($karray = $kresult->fetch_assoc()) {
-            array_push($array["keywords"], $karray["title"]);
-        }
+        echo json_encode($jsonData);
+    } else {
 
-        $jsonData[] = $array;
+        echo json_encode(array());
     }
-
-    echo json_encode($jsonData);
 }
 
 function getProduct($id) {
+    global $dbname;
     $conn = connect();
-    $conn->select_db("credicant");
+    $conn->select_db($dbname);
 
-    $sql = "SELECT * FROM products WHERE products.p_id = " . $id;
+    $sql = "SELECT * FROM Products WHERE Products.p_id = " . $id;
     $result = $conn->query($sql);
+    $data = $result->fetch_assoc();
 
-    $data = $result->fetch_row();
-    $sql = "SELECT src FROM pictures WHERE pictures.p_id = " . $id;
+    $sql = "SELECT src FROM Pictures WHERE Pictures.p_id = " . $id;
     $presult = $conn->query($sql);
     $data["pictures"] = [];
     while ($parray = $presult->fetch_assoc()) {
         array_push($data["pictures"], $parray["src"]);
     }
 
-    $sql = "SELECT title FROM keywords WHERE keywords.p_id = " . $id;
+    $sql = "SELECT title FROM Keywords WHERE Keywords.p_id = " . $id;
     $kresult = $conn->query($sql);
     $data["keywords"] = [];
     while ($karray = $kresult->fetch_assoc()) {
@@ -234,24 +313,34 @@ function getProduct($id) {
 }
 
 function getOrders() {
+    global $dbname;
     $conn = connect();
-    $conn->select_db("credicant");
+    $conn->select_db($dbname);
 
-    $sql = "SELECT * FROM orders";
+    $sql = "SELECT * FROM Orders";
     $result = $conn->query($sql);
 
-    $jsonData = array();
-    while ($array = $result->fetch_assoc()) {
-        $sql = "SELECT p_id FROM orderItems WHERE orderItems.o_id = " . $array["o_id"];
-        $oresult = $conn->query($sql);
-        $array["products"] = [];
-        while ($oarray = $oresult->fetch_assoc()) {
-            array_push($array["products"], getProduct($oarray["p_id"]));
+    if (is_object($result)) {
+
+        $jsonData = array();
+        while ($array = $result->fetch_assoc()) {
+            $sql = "SELECT p_id, productcount FROM OrderItems WHERE OrderItems.o_id = " . $array["o_id"];
+            $oresult = $conn->query($sql);
+            $array["products"] = [];
+            while ($oarray = $oresult->fetch_assoc()) {
+                $product = new stdClass();
+                $product->count = $oarray["productcount"];
+                $product->product = getProduct($oarray["p_id"]);
+                array_push($array["products"], $product);
+            }
+
+            $jsonData[] = $array;
         }
 
-        $jsonData[] = $array;
-    }
+        echo json_encode($jsonData);
+    } else {
 
-    echo json_encode($jsonData);
+        echo json_encode(array());
+    }
 }
 ?>

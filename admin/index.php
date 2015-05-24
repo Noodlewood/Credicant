@@ -21,7 +21,28 @@ if ($need_login) {
 </head>
 <body>
 
-<div class="large-12 columns small-centered">
+<div class="small-12 columns small-centered">
+    <div class="row">
+        <h2>Bestellungen</h2>
+        <div class="large-12 columns">
+            <table>
+                <thead>
+                <tr>
+                    <th width="20">Nr.</th>
+                    <th>Vorname</th>
+                    <th>Nachname</th>
+                    <th>Adresse</th>
+                    <th>Stadt</th>
+                    <th>PLZ</th>
+                    <th>E-Mail</th>
+                    <th>Produkte</th>
+                    <th>Summe</th>
+                </tr>
+                </thead>
+                <tbody id="ordersList"></tbody>
+            </table>
+        </div>
+    </div>
     <div class="row">
         <div data-alert class="alert-box success radius">
             Produkt wurde angelegt.
@@ -33,7 +54,7 @@ if ($need_login) {
         </div>
         <h2 id="cartTitle">Produkt anlegen</h2>
         <div class="large-12 columns">
-            <form id="product">
+            <form id="product" action="../file.php" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="large-12 columns">
                         <label>Titel
@@ -44,7 +65,7 @@ if ($need_login) {
                 <div class="row">
                     <div class="large-12 columns">
                         <label>Preis
-                            <input type="number" name="price" required/>
+                            <input type="number" step="any" name="price" required/>
                         </label>
                     </div>
                 </div>
@@ -58,14 +79,14 @@ if ($need_login) {
                 <div class="row">
                     <div class="large-12 columns">
                         <label>Beschreibung
-                            <textarea name="description" style="height: 200px;" required></textarea>
+                            <textarea name="description" style="height: 200px;" requireds></textarea>
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="large-12 columns">
                         <label id="picturesLabel">Bilder
-                            <input type="text" name="pictures" required/>
+                            <input id="file-input" type="file" name="pictures[]" accept="image/*" multiple/>
                         </label>
                     </div>
                 </div>
@@ -79,81 +100,33 @@ if ($need_login) {
         </div>
         <div id="cartItems" class="large-6 columns"></div>
     </div>
+    <div class="row">
+        <h2>Produkte löschen</h2>
+        <div class="large-12 columns">
+            <table>
+                <thead>
+                <tr>
+                    <th width="300">Produkt</th>
+                    <th width="300">löschen?</th>
+                </tr>
+                </thead>
+                <tbody id="productDeleteList"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <button style="margin-top: 100px;" class="alert radius" id="recreateDbBtn">Datenbank neu erstellen</button>
+    </div>
 </div>
 <script src="../libs/vendor/jquery.js"></script>
 <script src="../libs/foundation.min.js"></script>
 <script src="../libs/inheritance-2.7.js"></script>
 <script src="../libs/Namespace.js"></script>
 <script src="../libs/Observable.js"></script>
+<script src="../js/views/AdminView.js"></script>
 <script src="../js/controller/Database.js"></script>
 <script src="../js/models/Product.js"></script>
 <script src="../js/models/Order.js"></script>
-<script>
-
-    $(document).ready(function() {
-        $(document).foundation();
-        CRC.ns('CRC');
-        var db = new CRC.controller.Database();
-
-        var _productsLoaded = function(products) {
-            $.each(products, function(index, product) {
-                console.log(product)
-            });
-        };
-
-        db.addListener('productsLoaded', _productsLoaded, this);
-
-        var _ordersLoaded = function(orders) {
-            $.each(orders, function(index, c) {
-                console.log(orders)
-            });
-        };
-
-        db.addListener('ordersLoaded', _ordersLoaded, this);
-
-        db.loadOrders();
-
-        var cloneKeywordsOnKeydown = function() {
-            var field = $('<input type="text" name="keywords"/>');
-            field.one('keydown', cloneKeywordsOnKeydown);
-            $('#keywordsLabel').append(field)
-        };
-
-        var clonePicturesOnKeydown = function() {
-            var field = $('<input type="text" name="pictures"/>');
-            field.one('keydown', clonePicturesOnKeydown);
-            $('#picturesLabel').append(field)
-        };
-
-        var titleField = $("input[name='title']");
-        var priceField = $("input[name='price']");
-        var descField = $("textarea[name='description']");
-
-        $("input[name='keywords']").one('keydown',cloneKeywordsOnKeydown);
-        $("input[name='pictures']").one('keydown',clonePicturesOnKeydown);
-
-        $('#product').submit(function(){
-            event.preventDefault();
-
-            var keywordsField = $("input[name='keywords']");
-            var picturesField = $("input[name='pictures']");
-
-            var title = titleField.val();
-            var price = priceField.val();
-            var keywords = [];
-            $.each(keywordsField, function(index, field) {
-                keywords.push($(field).val());
-            });
-            var desc = descField.val();
-            var pictures = [];
-            $.each(picturesField, function(index, field) {
-                pictures.push($(field).val());
-            });
-
-            var newProduct = new CRC.model.Product(title, price, desc, keywords, pictures);
-            db.addDBProduct(newProduct);
-        });
-    });
-</script>
+<script src="Admin.js"></script>
 </body>
 </html>

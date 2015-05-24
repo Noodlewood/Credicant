@@ -9,6 +9,7 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
     initialize: function () {
         this._db = new CRC.controller.Database();
         this._db.addListener('productsLoaded', this._productsLoaded, this);
+
         this._db.loadProducts();
 
         this._shoppingCartLabel = new CRC.views.ShoppingCartLabel();
@@ -24,7 +25,6 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
     },
 
     _productsLoaded: function(products) {
-        console.log(products)
         var me = this;
         var itemList = $('.item-list');
         $.each(products, function(index, product) {
@@ -67,10 +67,11 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
         this._shoppingCart.update();
     },
 
-    _submitOrder: function(order, shoppingItems) {
+    _submitOrder: function(order) {
 
         $.post('order.php', {
-                order: shoppingItems,
+                order: order.getProducts(),
+                number: order.getNumber(),
                 forename: order.getFirstname(),
                 surname: order.getSurname(),
                 street: order.getStreet(),

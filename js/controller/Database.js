@@ -1,6 +1,7 @@
 CRC.ns('CRC.controller.Database');
 
-var DB_PATH = '/credicant/db.php';
+//var DB_PATH = '/credicant/db.php';
+var DB_PATH = '/shop/db.php';
 
 CRC.controller.Database = Class.extend(CRC.util.Observable, {
 
@@ -22,16 +23,14 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
         */
 
         $.post(DB_PATH, {
-            action: 'getShoppingCartProducts'
+            action: 'getProducts'
         }, function (data) {
             $.each($.parseJSON(data), function (index, product) {
                 products.push(new CRC.model.Product(product.title, product.price, product.description, product.keywords, product.pictures, product.p_id));
             });
             me.fireEvent("productsLoaded", [products]);
-        }).fail(function() {
         });
     },
-
 
     loadOrders: function() {
         var me = this;
@@ -44,7 +43,7 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
             type: 'post',
             success:function(result){
                 $.each($.parseJSON(result), function (index, order) {
-                    orders.push(new CRC.model.Order(order.firstname, order.surname, order.street, order.city, order.postal, order.mail, order.products));
+                    orders.push(new CRC.model.Order(order.firstname, order.surname, order.street, order.city, order.postal, order.mail, order.products, order.o_id));
                 });
                 me.fireEvent("ordersLoaded", [orders]);
             }
@@ -63,7 +62,6 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
     },
 
     dropDB: function() {
-        var me = this;
         $.ajax({
             url: DB_PATH,
             data: {action: 'drop'},
@@ -74,7 +72,23 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
         });
     },
 
+    recreateDB: function() {
+        var me = this;
+
+        $.ajax({
+            url: DB_PATH,
+            data: {action: 'recreate'},
+            type: 'post',
+            success:function(result){
+                me.fireEvent("productChanged");
+                console.log(result);
+            }
+        });
+    },
+
     addDBProduct: function(product) {
+        var me = this;
+
         $.post(DB_PATH, {
             action: 'addProduct',
             title: product.getTitle(),
@@ -83,9 +97,21 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
             desc: product.getDescription(),
             pictures: product.getPictures()
         }, function () {
+            me.fireEvent("productChanged");
             $('.alert-box.success').show().delay(2000).fadeOut();
         }).fail(function() {
             $('.alert-box.alert').show().delay(2000).fadeOut();
+        });
+    },
+
+    deleteDBProduct: function(product) {
+        var me = this;
+
+        $.post(DB_PATH, {
+            action: 'deleteProduct',
+            p_id: product.getId()
+        }, function() {
+            me.fireEvent("productChanged");
         });
     },
 
@@ -97,9 +123,10 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
                 firstname: order.getFirstname(),
                 surname: order.getSurname(),
                 street: order.getStreet(),
+                city: order.getCity(),
                 postal: order.getPostal(),
                 mail: order.getMail(),
-                products: order.getProductIds()
+                products: order.getProducts()
             },
             type: 'post',
             success:function(result){
