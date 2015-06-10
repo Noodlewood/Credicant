@@ -3,7 +3,8 @@ CRC.views.ProductThumbView = Class.extend(CRC.util.Observable, {
 
     initialize: function(product) {
 
-        this.shopItemOuter = $('<a class="large-4 small-12 columns"  href="#" data-reveal-id="detailModal"></a>');
+        //this.shopItemOuter = $('<a class="large-6 small-12 columns"  href="#" data-reveal-id="detailModal"></a>');
+        this.shopItemOuter = $('<a class="large-6 small-12 columns"  href="#"></a>');
         var inner = $('<div class="shadow opac"></div>');
         var picture = $('<img class="item-pic" src="">');
         var title = $('<h5 class="item-title"></h5>');

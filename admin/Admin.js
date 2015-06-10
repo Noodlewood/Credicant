@@ -37,7 +37,7 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
         var descField = $("textarea[name='description']");
 
         var me = this;
-        $('#product').submit(function(e) {
+        $('#submitProduct').click(function(e) {
 
             var keywordsField = $("input[name='keywords']");
             var picturesField = $("input[name='pictures[]']");
@@ -57,10 +57,15 @@ CRC.Credicant = Class.extend(CRC.util.Observable, {
 
             var newProduct = new CRC.model.Product(title, price, desc, keywords, pictures);
             me._db.addDBProduct(newProduct);
+
         });
 
         $('#recreateDbBtn').click(function() {
             me._db.recreateDB();
+        });
+
+        $('#deletePhotos').click(function() {
+            me._db.deletePhotos();
         });
     },
 

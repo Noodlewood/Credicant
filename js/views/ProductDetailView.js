@@ -11,7 +11,12 @@ CRC.views.ProductDetailView = Class.extend(CRC.util.Observable, {
         });
 
         $('#detailCart').click(function() {
-            me.fireEvent('goToCartClicked');
+            me.fireEvent('goTo', ['site-cart']);
+            return false;
+        });
+
+        $('#detailBack').click(function() {
+            me.fireEvent('goTo', ['site-shop']);
             return false;
         });
     },
@@ -26,7 +31,6 @@ CRC.views.ProductDetailView = Class.extend(CRC.util.Observable, {
     _setContent: function() {
         $('#detailTitle').text(this._product.getTitle());
         $('#detailDesc').html(this._product.getDescription());
-
         /*
         var keywords =  $('#detailKeywords');
         keywords.empty();
@@ -41,7 +45,12 @@ CRC.views.ProductDetailView = Class.extend(CRC.util.Observable, {
     },
 
     _setDetailPicture: function(picture) {
-        $('#detailPicture').prop('src', picture);
+        $('#detailPicture').attr('src', picture);
+        $('#detailPictureZoom')
+            .trigger('zoom.destroy')
+            .zoom({
+                url: picture
+        });
     },
 
     _addDetailThumbs: function(thumbs) {
@@ -49,7 +58,7 @@ CRC.views.ProductDetailView = Class.extend(CRC.util.Observable, {
         var thumbsOuter = $('#detailThumbs');
         thumbsOuter.empty();
         $.each(thumbs, function (index, thumb) {
-            console.log(thumb);
+
             $('<div></div>')
                 .css('background-image', 'url(' + thumb + ')')
                 .addClass('detail-thumb')

@@ -1,7 +1,8 @@
 CRC.ns('CRC.model.Order');
 CRC.model.Order = Class.extend({
 
-    initialize: function(firstname, surname, street, city, postal, mail, products, number) {
+    initialize: function(payment, firstname, surname, street, city, postal, mail, products, number) {
+        this._payment = payment;
         this._number = number;
         this._firstname = firstname;
         this._surname = surname;
@@ -15,8 +16,16 @@ CRC.model.Order = Class.extend({
         }
     },
 
+    getPayment: function() {
+        return this._payment;
+    },
+
     getNumber: function() {
       return this._number;
+    },
+
+    setNumber: function(number) {
+      this._number = number;
     },
 
     getFirstname: function() {

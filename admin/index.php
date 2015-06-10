@@ -92,8 +92,7 @@ if ($need_login) {
                 </div>
                 <div class="row">
                     <div class="large-12 columns">
-                        <input type="submit" class="button medium primary radius"
-                               value="Produkt anlegen"/>
+                        <button id="submitProduct" class="button medium secondary radius">Produkt anlegen</button>
                     </div>
                 </div>
             </form>
@@ -116,6 +115,9 @@ if ($need_login) {
     </div>
     <div class="row">
         <button style="margin-top: 100px;" class="alert radius" id="recreateDbBtn">Datenbank neu erstellen</button>
+    </div>
+    <div class="row">
+        <button style="margin-top: 100px;" class="alert radius" id="deletePhotos">Alle Fotos löschen</button>
     </div>
 </div>
 <script src="../libs/vendor/jquery.js"></script>

@@ -1,5 +1,6 @@
 <?php
     function createOrderMail() {
+        $payment = $_POST["payment"];
         $shoppingItems = $_POST["order"];
         $surname = $_POST["surname"];
         $forename = $_POST["forename"];
@@ -23,13 +24,14 @@ Bestellnummer: " .$number . "
         }
 
         $mail .= "Gesamtpreis: EUR " . $sum . PHP_EOL;;
-        $mail .= "Rechnungsanschrift: " . $forename . " " . $surname . ", " . $street . ", " . $postal . " " . $city . PHP_EOL;;
+        $mail .= "Rechnungsanschrift: " . $forename . " " . $surname . ", " . $street . ", " . $postal . " " . $city . PHP_EOL;
+        $mail .= "Zahlungsart: " . $payment . PHP_EOL;
 
         return $mail;
     }
 
     function createConfirmationMail() {
-
+        $payment = $_POST["payment"];
         $shoppingItems = $_POST["order"];
         $surname = $_POST["surname"];
         $forename = $_POST["forename"];
@@ -64,8 +66,10 @@ Bestellnummer: " .$number . "
         $mail .= "Gesamtpreis: EUR " . $sum . PHP_EOL;
         $mail .= "Rechnungsanschrift: " . $forename . " " . $surname . ", " . $street . ", " . $postal . " " . $city . PHP_EOL;;
 
-        $mail .=
-"Zahlungsart: Vorkasse
+        if ($payment == "Vorkasse") {
+            $mail .=
+"
+Zahlungsart: Vorkasse
 
 Lieferzeit: ca. 3-7 Tage nach Zahlungseingang
 
@@ -73,10 +77,19 @@ Bitte überweisen Sie den Rechnungsbetrag binnen 5 Tagen auf unser Konto:
 
 Florian Herrmann
 KTO 7100884, BLZ 76560060 (Raiffeisen u. Volksbank Ansbach)
-IBAN: DE55 7656 0060 0007 1008 84, BIC: GENODEF1ANS
+IBAN: DE55 7656 0060 0007 1008 84, BIC: GENODEF1ANS";
+        } else {
+        $mail .=
+"
+Zahlungsart: PayPal
 
+Lieferzeit: ca. 3-7 Tage nach Zahlungseingang
 
-Ich danke Ihnen ganz herzlich für Ihre Bestellung. Mit dieser E-Mail ist der Kaufvertrag geschlossen.
+";
+        }
+
+        $mail .=
+"Ich danke Ihnen ganz herzlich für Ihre Bestellung. Mit dieser E-Mail ist der Kaufvertrag geschlossen.
 Es gelten unsere AGB (siehe Homepage), die Sie mit der Lieferung in Textform erhalten.
 
 In Fröhlichkeit
@@ -154,9 +167,6 @@ Ende der Widerrufsbelehrung";
 	    $form_data['errors']  = $errors;
 	}
 	else { //If not, process the form, and return true on success
-	    $form_data['success'] = true;
-	    $form_data['posted'] = 'Data Was Posted Successfully';
-
         if (isset($_POST["mail"]) &&
             isset($_POST["number"]) &&
             isset($_POST["order"]) &&
@@ -177,6 +187,9 @@ Ende der Widerrufsbelehrung";
 
             mail($_POST["mail"], "Vielen Dank für Ihre Bestellung bei Credicant!", $confirmationMail, $header);
             mail("info@credicant.com", "Bestellung eingegangen", $orderMail, $header);
+
+            $form_data['success'] = true;
+            $form_data['posted'] = 'Data Was Posted Successfully';
         }
 	}
 

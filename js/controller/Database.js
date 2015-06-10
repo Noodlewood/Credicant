@@ -89,19 +89,25 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
     addDBProduct: function(product) {
         var me = this;
 
-        $.post(DB_PATH, {
-            action: 'addProduct',
-            title: product.getTitle(),
-            price: product.getPrice(),
-            keywords: product.getKeywords(),
-            desc: product.getDescription(),
-            pictures: product.getPictures()
-        }, function () {
-            me.fireEvent("productChanged");
-            $('.alert-box.success').show().delay(2000).fadeOut();
+        $.ajax({
+            url: DB_PATH,
+            data: {
+                action: 'addProduct',
+                title: product.getTitle(),
+                price: product.getPrice(),
+                keywords: product.getKeywords(),
+                desc: product.getDescription(),
+                pictures: product.getPictures()
+            },
+            type: 'post',
+            success:function(result){
+                me.fireEvent("productChanged");
+                $('.alert-box.success').show().delay(2000).fadeOut();
+            }
         }).fail(function() {
-            $('.alert-box.alert').show().delay(2000).fadeOut();
+           $('.alert-box.alert').show().delay(2000).fadeOut();
         });
+
     },
 
     deleteDBProduct: function(product) {
@@ -116,6 +122,8 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
     },
 
     addDBOrder: function(order) {
+        if (order.getProducts().length < 1) return;
+        var me = this;
         $.ajax({
             url: DB_PATH,
             data: {
@@ -129,9 +137,40 @@ CRC.controller.Database = Class.extend(CRC.util.Observable, {
                 products: order.getProducts()
             },
             type: 'post',
-            success:function(result){
-                console.log(result);
+            success:function(data){
+                var result = $.parseJSON(data);
+                if(result["id"]) {
+                    order.setNumber(result["id"]);
+                    me._submitOrder(order);
+                }
             }
+        });
+    },
+
+    _submitOrder: function(order) {
+        $.post('order.php', {
+            payment: order.getPayment(),
+            order: order.getProducts(),
+            number: order.getNumber(),
+            forename: order.getFirstname(),
+            surname: order.getSurname(),
+            street: order.getStreet(),
+            city: order.getCity(),
+            postal: order.getPostal(),
+            mail: order.getMail()
+        }, function (response) {
+            $('#cartModal').foundation('reveal', 'close');
+            $('.alert-box.success').show().delay(2000).fadeOut();
+        }).fail(function() {
+            $('#cartModal').foundation('reveal', 'close');
+            $('.alert-box.alert').show().delay(2000).fadeOut();
+        });
+    },
+
+    deletePhotos: function() {
+        $.post('/shop/file.php', {
+            action: 'deletePhotos'
+        }, function() {
         });
     }
 });

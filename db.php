@@ -1,5 +1,4 @@
 <?php
-
 $dbname = "d01e4dd1";
 
 if(isset($_POST['action']) && !empty($_POST['action'])) {
@@ -17,16 +16,16 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 }
 
 function connect() {
-/*
+
     $servername = "www.credicant.com";
     $username = "d01e4dd1";
     $password = "7JPMSXF3AEZEMH6H";
-*/
 
+/*
     $servername = "localhost";
     $username = "root";
     $password = "";
-
+*/
 
     $conn = new mysqli($servername, $username, $password);
     if ($conn->connect_error) {
@@ -182,6 +181,7 @@ function addProduct() {
         }
         foreach($_POST["pictures"] as $picture) {
             if (!empty($picture)) {
+                $picture = preg_replace('/\s+/', '', $picture);
                 $sql = "INSERT INTO Pictures (p_id, src) VALUES (" . $id . ",'" . $picture . "')";
                 $conn->query($sql);
             }
@@ -237,13 +237,17 @@ function addOrder() {
     $sql = "INSERT INTO Orders (orderdate, firstname, surname, street, city, postal, mail) VALUES ('" . date("Y-m-d") . "', '" . $_POST["firstname"] . "', '" . $_POST["surname"] . "', '" . $_POST["street"] . "', '" . $_POST["city"] . "', " . $_POST["postal"] . ", '" . $_POST["mail"] . "')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Order inserted successfully" . PHP_EOL;
         $id = $conn->insert_id;
         foreach($_POST["products"] as $product) {
             $sql = "INSERT INTO OrderItems (productcount, o_id, p_id) VALUES (" . $product['count'] . ", " . $id . ", " . $product['id'] . ")";
             $conn->query($sql);
         }
 
+        $response = array();
+        $response["success"] = "Order inserted successfully";
+        $response["id"] = $id;
+
+        echo json_encode($response);
     } else {
         echo "Error inserting into database: " . $conn->error . PHP_EOL;
     }
@@ -343,4 +347,5 @@ function getOrders() {
         echo json_encode(array());
     }
 }
+
 ?>

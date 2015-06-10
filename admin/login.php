@@ -1,7 +1,7 @@
 <?php
 session_start();
-$username = "dan";
-$password = "1234";
+$username = "flo";
+$password = "oechsler";
 if (isset($_POST["username"]) && isset($_POST["password"])) {
 	if ($_POST["username"] == $username && $_POST["password"] == $password) {
 		$_SESSION["login"] = true;

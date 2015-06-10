@@ -6,7 +6,7 @@ CRC.views.ShoppingCartLabel = Class.extend(CRC.util.Observable, {
         var el = $('#shoppingCartLabel');
 
         el.click(function() {
-            me.fireEvent('goToCartClicked');
+            me.fireEvent('goTo', ['site-cart']);
         });
 
         this._label = $(el.children()[0]);

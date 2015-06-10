@@ -1,3 +1,19 @@
+<?php
+/* Short and sweet */
+define('WP_USE_THEMES', false);
+require('./wp-blog-header.php');
+?>
+
+<?php
+$posts = get_posts('numberposts=10&order=ASC&orderby=post_title');
+foreach ($posts as $post) : setup_postdata( $post ); ?>
+    <?php the_date(); echo "<br />"; ?>
+    <?php the_title(); ?>
+    <?php the_excerpt(); ?>
+<?php
+endforeach;
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +21,8 @@
     <meta charset="UTF-8">
     <title>Credicant</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-    <link href="resources/css/foundation.min.css" type="text/css" rel="stylesheet">
-    <link href="resources/css/style.css" type="text/css" rel="stylesheet">
+    <link href="../resources/css/foundation.min.css" type="text/css" rel="stylesheet">
+    <link href="../resources/css/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="bg-image"></div>
@@ -14,8 +30,8 @@
 
     <nav class="top-bar header shadow" data-topbar role="navigation">
         <ul class="title-area">
-            <li ref="site-home" class="name">
-                <h1><a href="#"><img id="title-img" src="resources/gfx/credicant_header.png"></a></h1>
+            <li class="name">
+                <h1><a href="#">Credicant</a></h1>
             </li>
             <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
             <li class="toggle-topbar menu-icon"><a href="#"><span>Navigation</span></a></li>
@@ -24,17 +40,14 @@
         <section class="top-bar-section">
             <!-- Right Nav Section -->
             <ul class="right">
-                <li ref="site-home"><a href="#">Home</a></li>
-                <li ref="site-about"><a href="#">Über mich</a></li>
-                <li ref="site-philosophy"><a href="#">Philosophie</a></li>
-                <li ref="site-shop"><a href="#" >Shop</a></li>
-                <li ref="site-blog"><a href="#">Blog</a></li>
-                <li ref="site-cart" class="nav-item cart"><a href="#">Warenkorb</a></li>
+                <li ref="site-cart"><a href="#">Warenkorb</a></li>
             </ul>
 
             <!-- Left Nav Section -->
             <ul class="left">
-
+                <li ref="site-home" class="active"><a href="#">Über mich</a></li>
+                <li ref="site-shop"><a href="#" >Shop</a></li>
+                <li ><a href="">Blog</a></li>
             </ul>
         </section>
     </nav>
@@ -52,41 +65,47 @@
     <div class="large-12 columns content">
         <!-- Home -->
         <div class="row" id="site-home">
-                <div class="large-12 columns">
-                    <div class="shadow">
-                        <div class="panel">
-                            <div class="row">
-                                <img class="small-7 columns site-owner-picture" src="resources/gfx/home-logo.png">
-                                <div class="small-5 columns ">
-                                    <div>In dem Wort Credicant stecken die Worte can´t und Credit, was so viel bedeutet wie: "Du kannst es auch ohne Kredit schaffen."
-                                        Es ist eine Art zu denken und zu leben. Es heißt seine Herzenswünsche zu finden und ihnen zu folgen. Sie Wahrheit werden zu lassen,
-                                        ohne dabei in Abhängigkeit von Banken oder anderen gehen zu müssen. Ein Herzenswunsch ist ein Wunsch, bei dem alles in einem
-                                        nach Freude ruft, egal wie groß oder klein dieser ist. Hat man ihn gefunden und stellt sich vor wie dieser bereits Wirklichkeit ist, so schafft man
-                                        eine Vision von sich. Verstärkt man diese täglich, so beginnt man einen Prozess ins Rollen zu bringen, der einen schritt für schritt genau dort zu ihr bringt.
-                                        Durch die gestärkte Vision kann man alle anfallenden Aufgaben und Probleme, die einen begegnen, bestmöglichst begrüßen und meistern.
-                                        Man wird Zweifel, fallen, aufstehen, Glück, Hoffnung, Freude und vielen mehr begegnen. Es gehört viel Mut und Geduld dazu.
-                                        Es ist es jedoch wert, es ist ein aufregender Weg mit einem wunderbaren Ziel. Es ist im Leben sein, es spüren.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <!-- End Home -->
+            <div class="large-4 small-12 columns ">
+                <img class="shadow" src="../resources/gfx/logo-schwarz.jpg">
 
-        <!-- About -->
-        <div class="row" id="site-about">
-            <div class="large-12 columns">
-                <div class="shadow">
-                    <div class="panel">
-                        <div class="row">
-                            <img class="small-7 columns site-owner-picture" src="resources/gfx/shop_owner.jpg">
-                            <div class="small-5 columns ">
-                                <div>Hi, mein Name ist Flo. Ich möchte hier auf dieser Seite meinen Herzenswunsch verwirklichen. Ich möchte Euch Produkte anbieten, die einem Freude im Leben bringen.
-                                    Schon immer hatte ich ein großes Interesse für Produkte, die mich faszinieren, sie mussten durch Aussehen, praktischen Nutzen und Qualität überzeugen. Ich liebe es solche
-                                    Produkte ausfindig zu machen, dabei achte ich auf verschiedene Dinge wie Exklusivität, Genialität, Nachhaltigkeit und Gesundheit. Diese Begeisterung möchte ich nun
-                                    mit Euch auf dieser Plattform teilen.
+                <div class="hide-for-small panel shadow opac">
+                    <h3>Credicant</h3>
+                    <h5 class="subheader">Create your Life<br/><br/>
+                        Du liebst es einfach einfach,
+                        reist gerne oder bist viel unterwegs?
+                        Du magst es exklusiv und unkompliziert?<br/><br/>
+                        Für dich bin ich auf die Reise gegangen.
+                        In meinem Onlineshop findest du
+                        coole Produkte aus aller Welt!
+                    </h5>
+                </div>
+
+                <a href="#">
+                    <div id="shoppingCartLabel" class="panel callout radius shadow opac">
+                        <h5 class="shopping-cart-icon">keine Waren im Korb</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="large-8 columns">
+                <div class="row">
+                    <div class="large-12 columns opac">
+                        <div class="shadow">
+                            <div class="panel">
+                                <div class="row opac">
+                                    <img class=" small-6 columns site-owner-picture"
+                                         src="../resources/gfx/shop_owner.jpg">
+
+                                    <div class=" small-6 columns ">
+                                        <div>Hi, mein Name ist Flo. Ich starte hier ein Projekt, bei dem ich immer
+                                            auf der Suche nach
+                                            neuen, abgefahrenen Dingen bin. Schon immer hatte ich ein großes
+                                            Interesse für Produkte,
+                                            die mich faszinieren. Diese mussten mich durch Aussehen, Qualität und
+                                            praktischem Nutzen
+                                            überzeugen. Meine Begeisterung möchte ich nun mit Euch auf dieser
+                                            Plattform teilen.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,13 +113,7 @@
                 </div>
             </div>
         </div>
-        <!-- End About -->
-
-        <!-- Philosophy -->
-        <div class="row" id="site-philosophy">
-           <div class="philosophy-text">Das Leben ist Bewegung und Veränderung!</div>
-        </div>
-        <!-- End Philosophy -->
+        <!-- End Home -->
 
         <!-- Shop -->
         <div class="row" id="site-shop"></div>
@@ -111,9 +124,7 @@
             <div class="small-6 columns">
                 <div class="row">
                     <div class="small-12 columns text-center">
-                        <span id="detailPictureZoom" style="display:inline-block">
                         <img src="" id="detailPicture"/>
-                        </span>
                     </div>
                 </div>
                 <div class="row">
@@ -125,7 +136,6 @@
             <div class="small-6 columns">
                 <div class="row">
                     <div class="small-6 columns item-margin">
-
                         <h2 id="detailTitle"></h2>
                     </div>
                     <div class="small-6 columns item-margin">
@@ -209,39 +219,15 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label>Zahlungsart</label>
-                            <input type="radio" name="payment" value="Vorkasse" id="vorauskasseOpt" checked><label for="vorauskasseOpt">Vorauskasse</label>
-                            <input type="radio" name="payment" value="PayPal" id="paypalOpt"><label for="paypalOpt">PayPal</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div id="vorkasse" class="large-12 columns">
                             <input type="submit" class="button medium primary radius"
                                    value="kostenpflichtig Bestellen"/>
                         </div>
-
                     </div>
                 </form>
-                <div id="paypal" class="large-12 columns">
-                    <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="upload" value="1">
-                        <input type="hidden" name="business" value="flo@credicant.com">
-                        <input type="hidden" name="currency_code" value="EUR">
-                        <input type="hidden" name="handling_cart" value="5.9">
-                        <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-                    </form>
-                </div>
             </div>
             <div id="cartItems" class="large-6 columns"></div>
         </div>
         <!-- End Cart -->
-
-        <!-- Blog -->
-        <div class="row" id="site-blog">
-            <div id="commentForm"></div>
-        </div>
-        <!-- End Blog -->
     </div>
     <!-- End Content -->
     <footer class="row ">
@@ -528,72 +514,20 @@
     <p>Für Sendungen außerhalb Deutschlands kontaktieren Sie mich bitte unter info@credicant.com</p>
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
-<!-- <div id="detailModal" class="reveal-modal" data-reveal aria-labelledby="detailTitle" aria-hidden="true" role="dialog">
-    <div class="row">
-        <div class="small-6 columns">
-            <div class="row">
-                <div class="small-12 columns text-center">
-                    <img src="" id="detailPicture"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <div id="detailThumbs"></div>
-                </div>
-            </div>
-        </div>
-        <div class="small-6 columns">
-            <div class="row">
-                <div class="small-12 columns item-margin">
-                    <h2 id="detailTitle"></h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns item-margin">
-                    <div id="detailDesc"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-12 columns item-margin">
-                    <ul id="detailKeywords"></ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-6 columns item-margin">
-                    <h2 id="detailPrice"></h2>
-
-                    <div class="small-text">keine MwSt Ausweiß gem. § 19 UStG</div>
-                    <a class="small-text" href="#" data-reveal-id="shippingModal">zzgl. 5,90€ Versandkosten</a>
-                </div>
-                <div class="small-6 columns item-margin text-right">
-                    <button id="detailAdd" style="margin-top: 10px;" class="add-to-cart primary small radius">+1
-                    </button>
-                    <a href="#" id="detailCart" data-reveal-id="cartModal">
-                        <div id="shoppingCartDetail"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div> -->
-<script src="libs/vendor/jquery.js"></script>
-<script src="libs/jquery.zoom.min.js"></script>
-<script src="libs/foundation.min.js"></script>
-<script src="libs/inheritance-2.7.js"></script>
-<script src="libs/Namespace.js"></script>
-<script src="libs/Observable.js"></script>
-<script src="js/controller/Database.js"></script>
-<script src="js/controller/Blog.js"></script>
-<script src="js/models/Product.js"></script>
-<script src="js/models/Order.js"></script>
-<script src="js/models/ShoppingCartProducts.js"></script>
-<script src="js/views/ProductThumbView.js"></script>
-<script src="js/views/ProductDetailView.js"></script>
-<script src="js/views/ShoppingCartView.js"></script>
-<script src="js/views/ShoppingCartLabel.js"></script>
-<script src="js/views/Navigation.js"></script>
-<script src="js/views/BlogView.js"></script>
-<script src="js/Credicant.js"></script>
+<script src="../libs/vendor/jquery.js"></script>
+<script src="../libs/foundation.min.js"></script>
+<script src="../libs/inheritance-2.7.js"></script>
+<script src="../libs/Namespace.js"></script>
+<script src="../libs/Observable.js"></script>
+<script src="../js/controller/Database.js"></script>
+<script src="../js/models/Product.js"></script>
+<script src="../js/models/Order.js"></script>
+<script src="../js/models/ShoppingCartProducts.js"></script>
+<script src="../js/views/ProductThumbView.js"></script>
+<script src="../js/views/ProductDetailView.js"></script>
+<script src="../js/views/ShoppingCartView.js"></script>
+<script src="../js/views/ShoppingCartLabel.js"></script>
+<script src="../js/views/Navigation.js"></script>
+<script src="../js/Credicant.js"></script>
 </body>
 </html>
